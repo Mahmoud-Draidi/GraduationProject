@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Text('hello world mahmoud'),
+      home: Text('hello world mahmoud grad proj'),
     );
   }
 }

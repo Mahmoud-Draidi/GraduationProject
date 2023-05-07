@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587477186307",
+    "project_id": "muwasulatuna",
+    "storage_bucket": "muwasulatuna.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587477186307:android:874ba216d37543db50db36",
+        "android_client_info": {
+          "package_name": "com.example.mowasulatuna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587477186307-b37jtsq61ja2tsl6hhn51mue75ju60q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMWOXUOcrWQpuPCzADylLs509mRc9-ivI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587477186307-b37jtsq61ja2tsl6hhn51mue75ju60q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

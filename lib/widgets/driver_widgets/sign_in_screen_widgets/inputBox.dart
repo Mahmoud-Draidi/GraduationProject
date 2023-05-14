@@ -9,7 +9,7 @@ class InputBox extends StatelessWidget {
   final TextInputType type;
   final bool isPassword;
 
-  const InputBox(this.title, this.type, this.isPassword, {super.key});
+  InputBox(this.title, this.type, this.isPassword, {super.key});
 
   @override
   Widget build(BuildContext context) {

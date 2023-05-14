@@ -66,11 +66,13 @@ class SignInScreen extends StatelessWidget {
                       margin: EdgeInsets.only(right: w * 0.13),
                       child: TextButton(
                         onPressed: () {
-                          pro.setIsForgetPassClicked();
-                          pro.incNumOfClicksOnForgetPass();
-                          Timer(const Duration(seconds: 10), () {
+                          if(!pro.isForgetPassClicked){
                             pro.setIsForgetPassClicked();
-                          });
+                            pro.incNumOfClicksOnForgetPass();
+                            Timer(const Duration(seconds: 3), () {
+                              pro.setIsForgetPassClicked();
+                            });
+                          }
                         },
                         child: Text(
                           "هل نسيت كلمة المرور؟",

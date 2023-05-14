@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/screens/common_screens/easy_booking_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/know_screen.dart';
+import 'package:mowasulatuna/screens/common_screens/map_screen.dart';
 import 'package:mowasulatuna/widgets/driver_widgets/easy_screen_widgets/circle_button.dart';
 
 import 'sign_in_screen.dart';
@@ -57,7 +58,12 @@ class EasyScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleButton(false, () {
-
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MapScreen(),
+                        ),
+                      );
                     }),
                     SizedBox(width: w / 50),
                     CircleButton(false, () {
@@ -78,8 +84,7 @@ class EasyScreen extends StatelessWidget {
                       );
                     }),
                     SizedBox(width: w / 50),
-                    CircleButton(true, () {
-                    }),
+                    CircleButton(true, () {}),
                   ],
                 ),
               )),

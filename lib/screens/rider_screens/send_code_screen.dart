@@ -7,6 +7,7 @@ import 'package:mowasulatuna/providers/sned_code_provider.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
+import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:mowasulatuna/widgets/driver_widgets/sign_in_screen_widgets/inputBox.dart';
 import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,14 @@ class SendCodeScreen extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(right: w * 0.09),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUpScreen(),
+                        ),
+                      );
+                    },
                     icon: Icon(
                       Icons.arrow_forward,
                       color: Color(0xffdda006),

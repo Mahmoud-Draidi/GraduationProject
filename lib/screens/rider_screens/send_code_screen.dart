@@ -200,12 +200,30 @@ class SendCodeScreen extends StatelessWidget {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RHome(),
-                                ),
+                              Map<String, dynamic> userData = {
+                                'name': 'omar ',
+                                'email': 'omar@example.com',
+                              };
+
+                              FirestoreHelper firestoreHelper =
+                                  FirestoreHelper();
+
+                              firestoreHelper.addUserToFirestore(userData).then(
+                                (_) {
+                                  print('User added to Firestore successfully');
+                                },
+                              ).catchError(
+                                (error) {
+                                  print(
+                                      'Error adding user to Firestore: $error');
+                                },
                               );
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => RHome(),
+                              //   ),
+                              // );
                             },
                             child: Container(
                               height: h * 0.086,

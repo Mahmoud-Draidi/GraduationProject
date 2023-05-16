@@ -201,7 +201,7 @@ class SendCodeScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Map<String, dynamic> userData = {
-                                'name': 'omar ',
+                                'name': 'muath ',
                                 'email': 'omar@example.com',
                               };
 

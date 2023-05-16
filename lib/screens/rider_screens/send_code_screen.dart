@@ -12,6 +12,8 @@ import 'package:mowasulatuna/widgets/driver_widgets/sign_in_screen_widgets/input
 import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
 import 'package:provider/provider.dart';
 
+import '../../firebase_services/firestore_helper.dart';
+
 class SendCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -139,31 +141,32 @@ class SendCodeScreen extends StatelessWidget {
                                   ? Colors.black.withOpacity(0.4)
                                   : Colors.black,
                               child: Center(
-                                child:pro.numOfClicksOnResendCode<3?
-                                (pro.isInDuration
-                                    ? TimerScreen()
-                                    : Text(
-                                        "إعادة الإرسال",
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.vazirmatn(
-                                          color: Color(0xffdda006),
-                                          textStyle: TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w700,
+                                  child: pro.numOfClicksOnResendCode < 3
+                                      ? (pro.isInDuration
+                                          ? TimerScreen()
+                                          : Text(
+                                              "إعادة الإرسال",
+                                              textAlign: TextAlign.center,
+                                              style: GoogleFonts.vazirmatn(
+                                                color: Color(0xffdda006),
+                                                textStyle: TextStyle(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                            ))
+                                      : Text(
+                                          "لا يمكنك إعادة الارسال",
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.vazirmatn(
+                                            color: Color(0xffdda006)
+                                                .withOpacity(0.5),
+                                            textStyle: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                            ),
                                           ),
-                                        ),
-                                      ) ) : Text(
-                                  "لا يمكنك إعادة الارسال",
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.vazirmatn(
-                                    color: Color(0xffdda006).withOpacity(0.5),
-                                    textStyle: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                    ),
-                                  ),
-                                )
-                              ),
+                                        )),
                             ),
                             onTap: () {
                               if (pro.isInDuration ||

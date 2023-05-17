@@ -11,14 +11,22 @@ import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:provider/provider.dart';
-
 import 'firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 // import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
+int? initScreen;
 
-void main() async{
+Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
+  //Intro Screen First time opened or when reInstalled
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  initScreen = await preferences.getInt('initScreen');
+  await preferences.setInt('initScreen', 1);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -49,7 +57,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: LogoScreen(),
+
+      initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
+      routes: {
+        'home' : (context) => SignInScreen(),
+        'intro' : (context) => EasyScreen(),
+      },
     );
   }
 }

@@ -2,27 +2,23 @@
 import 'dart:convert';
 
 class Seat {
-  int? id;
   int seatCase = 0;
-  String? name;
-  String? location;
+  String name = '';
+  String location = '';
   
   Seat({
-    this.id,
     required this.seatCase,
-    this.name,
-    this.location,
+    required this.name,
+    required this.location,
   });
   
 
   Seat copyWith({
-    int? id,
     int? seatCase,
     String? name,
     String? location,
   }) {
     return Seat(
-      id: id ?? this.id,
       seatCase: seatCase ?? this.seatCase,
       name: name ?? this.name,
       location: location ?? this.location,
@@ -31,7 +27,6 @@ class Seat {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'seatCase': seatCase,
       'name': name,
       'location': location,
@@ -40,10 +35,9 @@ class Seat {
 
   factory Seat.fromMap(Map<String, dynamic> map) {
     return Seat(
-      id: map['id'] != null ? map['id'] as int : null,
       seatCase: map['seatCase'] as int,
-      name: map['name'] != null ? map['name'] as String : null,
-      location: map['location'] != null ? map['location'] as String : null,
+      name: map['name'] as String ,
+      location: map['location'] as String,
     );
   }
 
@@ -53,7 +47,7 @@ class Seat {
 
   @override
   String toString() {
-    return 'Seat(id: $id, seatCase: $seatCase, name: $name, location: $location)';
+    return 'Seat(seatCase: $seatCase, name: $name, location: $location)';
   }
 
   @override
@@ -61,7 +55,6 @@ class Seat {
     if (identical(this, other)) return true;
   
     return 
-      other.id == id &&
       other.seatCase == seatCase &&
       other.name == name &&
       other.location == location;
@@ -69,8 +62,7 @@ class Seat {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-      seatCase.hashCode ^
+    return seatCase.hashCode ^
       name.hashCode ^
       location.hashCode;
   }

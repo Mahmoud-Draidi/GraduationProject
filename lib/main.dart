@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/providers/input_box_provider.dart';
-import 'package:mowasulatuna/providers/sign_in_provider.dart';
+import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
+import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
+import 'package:mowasulatuna/providers/sign_up_screen_provider.dart';
 import 'package:mowasulatuna/providers/sned_code_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/easy_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/logo_screen.dart';
@@ -45,7 +47,8 @@ Future<void> main() async{
       providers: [
         ChangeNotifierProvider(create: (_) => InputBoxProvider()),
         ChangeNotifierProvider(create: (_) => SendCodeProvider()),
-        ChangeNotifierProvider(create: (_) => SignInProvider()),
+        ChangeNotifierProvider(create: (_) => SignInScreenProvider()),
+        ChangeNotifierProvider(create: (_) => SignUpScreenProvider()),
       ],
       child: const MyApp(),
     ),

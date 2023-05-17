@@ -8,13 +8,14 @@ import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/sign_in_screen_widgets/inputBox.dart';
+import 'package:mowasulatuna/widgets/driver_widgets/common_widgets/inputBox.dart';
 import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
 import 'package:provider/provider.dart';
 
 import '../../firebase_services/firestore_helper.dart';
 
 class SendCodeScreen extends StatelessWidget {
+  TextEditingController controllerCode = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<SendCodeProvider>(context);
@@ -97,6 +98,9 @@ class SendCodeScreen extends StatelessWidget {
                       'رمز التأكيد من الجوال',
                       TextInputType.text,
                       false,
+                      controllerCode,
+                      // pro.codeErrorMessage,
+                    // (){pro.setCodeErrorMessage(controllerCode.text);},
                     ),
                     SizedBox(
                       height: h * 0.35,
@@ -200,12 +204,29 @@ class SendCodeScreen extends StatelessWidget {
                         Expanded(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RHome(),
-                                ),
-                              );
+                              print('code :  ${controllerCode.text}');
+                              // Map<String, dynamic> userData = {
+                              //   'name': 'muath ',
+                              //   'email': 'muathhhhh@example.com',
+                              // };
+                              //
+                              // FirestoreHelper firestoreHelper =
+                              //     FirestoreHelper();
+                              //
+                              // firestoreHelper
+                              //     .addUserToFirestore(userData)
+                              //     .then((_) {
+                              //   print('User added to Firestore successfully');
+                              // }).catchError((error) {
+                              //   print('Error adding user to Firestore: $error');
+                              // });
+
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => RHome(),
+                              //   ),
+                              // );
                             },
                             child: Container(
                               height: h * 0.086,

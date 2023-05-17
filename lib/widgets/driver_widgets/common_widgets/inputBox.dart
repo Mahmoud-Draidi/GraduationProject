@@ -8,8 +8,10 @@ class InputBox extends StatelessWidget {
   final String title;
   final TextInputType type;
   final bool isPassword;
+  TextEditingController con;
+  // final String errorText;
 
-  InputBox(this.title, this.type, this.isPassword, {super.key});
+  InputBox(this.title, this.type, this.isPassword,this.con, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,8 @@ class InputBox extends StatelessWidget {
           ),
           Expanded(
             child: TextField(
-              textDirection: TextDirection.rtl,
+              controller: con,
+              textAlign: TextAlign.end,
               style: GoogleFonts.vazirmatn(
                 color: Color(0xb2f0f0f0),
                 textStyle:

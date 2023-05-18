@@ -1,8 +1,13 @@
 import 'dart:async';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
+import 'package:mowasulatuna/providers/sign_up_screen_provider.dart';
 import 'package:mowasulatuna/providers/sned_code_provider.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
@@ -16,9 +21,65 @@ import '../../firebase_services/firestore_helper.dart';
 
 class SendCodeScreen extends StatelessWidget {
   TextEditingController controllerCode = TextEditingController();
+  final String verificationID;
+  final String name;
+  final String phone;
+  final String email;
+  final String pass;
+
+  SendCodeScreen({super.key, required this.verificationID, required this.name, required this.phone, required this.email, required this.pass});
+
   @override
   Widget build(BuildContext context) {
+
+    signUp() async {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      try {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('please wiat!'),
+                content: Container(
+                  height: 50,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
+              );
+            });
+        // adding
+        final credential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: pass,
+        );
+        return credential;
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          Navigator.of(context).pop();
+          AwesomeDialog(
+            context: context,
+            title: "Error",
+            body: Text('The password is weak.'),
+          ).show();
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          Navigator.of(context).pop();
+          AwesomeDialog(
+            context: context,
+            title: "Error",
+            body: Text('The account already exists for that email.'),
+          ).show();
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+
     final pro = Provider.of<SendCodeProvider>(context);
+    final pro2 = Provider.of<SignUpScreenProvider>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -100,7 +161,7 @@ class SendCodeScreen extends StatelessWidget {
                       false,
                       controllerCode,
                       // pro.codeErrorMessage,
-                    // (){pro.setCodeErrorMessage(controllerCode.text);},
+                      // (){pro.setCodeErrorMessage(controllerCode.text);},
                     ),
                     SizedBox(
                       height: h * 0.35,
@@ -182,51 +243,75 @@ class SendCodeScreen extends StatelessWidget {
                                   pro.setIsInDuration();
                                 });
                               }
-
-                              // if(pro.isInDuration){
-                              //   pro.setCanResend();
-                              //   Timer(const Duration(seconds: 5), () {
-                              //     pro.setCanResend();
-                              //     pro.setIsInDuration();
-                              //   });
-                              // }
-                              // else{
-                              //   ;
-                              //   pro.incNumOfClicksOnResendCode();
-                              //
-                              //   Timer(const Duration(milliseconds: 7000), () {
-                              //     pro.setIsResendCodePressed();
-                              //   });
-                              //   pro.setIsInDuration();
                             },
                           ),
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               print('code :  ${controllerCode.text}');
-                              // Map<String, dynamic> userData = {
-                              //   'name': 'muath ',
-                              //   'email': 'muathhhhh@example.com',
-                              // };
-                              //
-                              // FirestoreHelper firestoreHelper =
-                              //     FirestoreHelper();
-                              //
-                              // firestoreHelper
-                              //     .addUserToFirestore(userData)
-                              //     .then((_) {
-                              //   print('User added to Firestore successfully');
-                              // }).catchError((error) {
-                              //   print('Error adding user to Firestore: $error');
-                              // });
+                              pro2.setShowDialogFalse();
 
-                              // Navigator.pushReplacement(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => RHome(),
-                              //   ),
-                              // );
+                              try{
+                                FirebaseAuth auth = FirebaseAuth.instance;
+                                PhoneAuthCredential credential =
+                                PhoneAuthProvider.credential(
+                                  verificationId: verificationID,
+                                  smsCode: controllerCode.text,
+                                );
+                              }on FirebaseAuthException catch(e){
+                                print('fire auth error eeeeeeeeeeeeeeeeeeeeeeeeeee');
+                                print(e.code);
+                              }catch(e){
+                                print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                                print(e.toString());
+                              }
+
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('please wiat!'),
+                                      content: Container(
+                                        height: 50,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      ),
+                                    );
+                                  });
+                              // await auth.signInWithCredential(credential);
+                              UserCredential? response = await signUp();
+                              if(response!=null){
+                                // Passenger p = Passenger(name: controllerName.text,);
+                                await FirebaseFirestore.instance.collection('passengers').add(
+                                    {
+                                      'name': name,
+                                      'phone': phone,
+                                      'email' : email,
+                                      'password' : pass,
+                                    }
+                                ).then((_) {
+                                  print('User added to Firestore successfully');
+                                }).catchError((error) {
+                                  print('Error adding user to Firestore: $error');
+                                });
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RHome(),
+                                  ),
+                                );
+                              }
+                              pro2.setShowDialogFalse();
+                              // if (auth.currentUser != null) {
+                              //   Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => RHome(),
+                              //     ),
+                              //   );
+                              // }
                             },
                             child: Container(
                               height: h * 0.086,

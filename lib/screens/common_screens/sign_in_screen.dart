@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +17,7 @@ import 'package:provider/provider.dart';
 class SignInScreen extends StatelessWidget {
   TextEditingController controllerPhone = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
-  TextEditingController controllerTest = TextEditingController();
+  // TextEditingController controllerTest = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -162,14 +164,50 @@ class SignInScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MyBus(),
-                                ),
-                              );
+
+                            onTap: () async{
+                              // pro.setShowDialogTrue();
+                              // if(pro.showDialog){
+                              //   showDialog(
+                              //     barrierDismissible: false,
+                              //     context: context,
+                              //     builder: (_) {
+                              //       return Dialog(
+                              //         child : CircularProgressIndicator(),
+                              //       );
+                              //     }
+                              //   );
+                              // };
+
+                            //   FirebaseAuth auth = FirebaseAuth.instance;
+                            //   await FirebaseAuth.instance.verifyPhoneNumber(
+                            //     phoneNumber: controllerPhone.text,
+                            //     verificationCompleted: (PhoneAuthCredential credential) async{
+                            //       print('111111111111111111111111111111111111111111');
+                            //       await auth.signInWithCredential(credential);
+                            //     },
+                            //     verificationFailed: (FirebaseAuthException e) {
+                            //       print('222222222222222222222222222222222');
+                            //         print(e.code);
+                            //       // pro.setShowDialogFalse();
+                            //     },
+                            //     codeSent: (String verificationId, int? resendToken) {
+                            //       print('333333333333333333333333333333333333333');
+                            //       // pro.setShowDialogFalse();
+                            //       Navigator.pushReplacement(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) => SendCodeScreen(verificationID: verificationId),
+                            //         ),
+                            //       );
+                            //     },
+                            //     codeAutoRetrievalTimeout: (String verificationId) {
+                            //     },
+                            //     timeout: const Duration(seconds: 60),
+                            //   );
+                            //
                             },
+
                             child: Container(
                               height: h * 0.086,
                               color: const Color(0xffdda006),
@@ -316,3 +354,35 @@ class SignInScreen extends StatelessWidget {
 //     ],
 //   ),
 // ),
+
+
+class LoadingDialog {
+  static void showLoadingDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                SizedBox(height: 16.0),
+                Text(
+                  message,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static void hideLoadingDialog(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+}

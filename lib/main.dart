@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => MyBus() : (context) => RHome(),
+        'home' : isSignedIn == false ? (context) => SignInScreen() : (context) => RHome(),
         'intro' : (context) => LogoScreen(),
       },
     );

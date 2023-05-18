@@ -6,6 +6,22 @@ class SignUpScreenProvider extends ChangeNotifier{
   String emailErrorMessage = '';
   String passErrorMessage = '';
   String repeatePassErrorMessage = '';
+  bool showDialog = false;
+  bool isPhoneExist = false;
+
+  setIsPhoneExistTrue(){
+    isPhoneExist = true;
+    notifyListeners();
+  }
+
+  setShowDialogTrue(){
+    showDialog = true;
+    notifyListeners();
+  }
+  setShowDialogFalse(){
+    showDialog = false;
+    notifyListeners();
+  }
 
   setNameErrorMessage(String str){
     nameErrorMessage = str;

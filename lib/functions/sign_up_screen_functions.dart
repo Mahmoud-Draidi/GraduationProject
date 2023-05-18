@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 class SignUpScreenFunctions {
@@ -98,10 +100,8 @@ class SignUpScreenFunctions {
       return 'Email must start with an alphanumeric character.';
     }
     if (!RegExp(r'\.[a-zA-Z]{2,}$').hasMatch(email)) {
-      return 'Invalid top-level domain.';
+      return 'Invalid email.';
     }
     return 'Valid Email.';
   }
-
-
 }

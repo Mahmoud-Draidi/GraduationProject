@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 class SendCodeProvider extends ChangeNotifier{
   int numOfClicksOnResendCode = 0;
   bool isInDuration = false;
-
   String codeErrorMessage = '';
+
+
+
 
   setCodeErrorMessage(String str){
     codeErrorMessage = str;

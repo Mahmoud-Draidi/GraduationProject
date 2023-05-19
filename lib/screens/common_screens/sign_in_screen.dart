@@ -11,7 +11,7 @@ import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/common_widgets/inputBox.dart';
+import 'package:mowasulatuna/widgets/inputBox.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatelessWidget {

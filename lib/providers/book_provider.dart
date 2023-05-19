@@ -17,6 +17,13 @@ class BookProvider extends ChangeNotifier{
   String detailsExpectedBusTime ='';
   String detailsDriverName = '';
 
+  int canCancelBook = 0;
+
+  setCanCancelBook(int n){
+    canCancelBook = n;
+    notifyListeners();
+  }
+
   getDetailsDayDate(){
     DateTime now = DateTime.now();
     final DateTime nextDay = now.add(Duration(days: 1));

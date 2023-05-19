@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/easy_screen_widgets/circle_button.dart';
+import 'package:mowasulatuna/widgets/circle_button.dart';
 
 import 'easy_booking_screen.dart';
 import 'easy_screen.dart';

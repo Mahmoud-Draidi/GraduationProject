@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/providers/seat_provider.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/easy_screen_widgets/circle_button.dart';
+import 'package:mowasulatuna/widgets/circle_button.dart';
 import 'package:provider/provider.dart';
 
 class SeatWidget extends StatelessWidget {

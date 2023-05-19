@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
-import 'package:mowasulatuna/widgets/my_bus_screen_widgets/seat.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../providers/seat_provider.dart';

@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/screens/common_screens/easy_screen.dart';
 
 class LogoScreen extends StatelessWidget{
+  const LogoScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class LogoScreen extends StatelessWidget{
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => EasyScreen(),
+          builder: (context) => const EasyScreen(),
         ),
       );
     });

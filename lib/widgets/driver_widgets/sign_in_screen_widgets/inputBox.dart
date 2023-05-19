@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/providers/input_box_provider.dart';
@@ -9,7 +8,7 @@ class InputBox extends StatelessWidget {
   final TextInputType type;
   final bool isPassword;
 
-  InputBox(this.title, this.type, this.isPassword, {super.key});
+  const InputBox(this.title, this.type, this.isPassword, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +30,13 @@ class InputBox extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: w * 0.75,
             child: Text(
               title,
               textAlign: TextAlign.right,
               style: GoogleFonts.vazirmatn(
-                color: Color(0xb2f0f0f0),
+                color: const Color(0xb2f0f0f0),
                 textStyle: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
@@ -49,7 +48,7 @@ class InputBox extends StatelessWidget {
             child: TextField(
               textDirection: TextDirection.rtl,
               style: GoogleFonts.vazirmatn(
-                color: Color(0xb2f0f0f0),
+                color: const Color(0xb2f0f0f0),
                 textStyle:
                     const TextStyle(fontSize: 22, fontWeight: FontWeight.w300),
               ),
@@ -60,7 +59,7 @@ class InputBox extends StatelessWidget {
                             onPressed: () {
                               pro.setShowPass();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove_red_eye,
                             ),
                           )
@@ -68,11 +67,11 @@ class InputBox extends StatelessWidget {
                             onPressed: () {
                               pro.setShowPass();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.visibility_off,
                             ),
                           )
-                    : Text(''),
+                    : const Text(''),
               ),
               keyboardType: type,
               keyboardAppearance: Brightness.dark,

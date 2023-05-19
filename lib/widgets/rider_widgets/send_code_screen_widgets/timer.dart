@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TimerScreen extends StatefulWidget {
+  const TimerScreen({super.key});
+
   @override
   _TimerScreenState createState() => _TimerScreenState();
 }
@@ -18,8 +20,8 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
       oneSec,
           (Timer timer) {
         if (_start == 0) {
@@ -53,8 +55,8 @@ class _TimerScreenState extends State<TimerScreen> {
               "إعادة الإرسال",
               textAlign: TextAlign.center,
               style: GoogleFonts.vazirmatn(
-                color: Color(0xffdda006).withOpacity(0.5),
-                textStyle: TextStyle(
+                color: const Color(0xffdda006).withOpacity(0.5),
+                textStyle: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -62,7 +64,7 @@ class _TimerScreenState extends State<TimerScreen> {
             ),
             Text(
               '$_start',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 22,
                 color: Color(0xb2f0f0f0),
               ),

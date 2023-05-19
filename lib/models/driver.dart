@@ -57,7 +57,7 @@ class Driver {
       'password': password,
       'turn': turn,
       'Location': Location,
-      'passengersList': passengersList!.map((x) => x?.toMap()).toList(),
+      'passengersList': passengersList!.map((x) => x.toMap()).toList(),
     };
   }
 

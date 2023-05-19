@@ -1,18 +1,13 @@
-import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mowasulatuna/providers/sned_code_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
-import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
-import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/widgets/driver_widgets/sign_in_screen_widgets/inputBox.dart';
-import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
-import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
 
@@ -36,11 +31,11 @@ class SignUpScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignInScreen(),
+                          builder: (context) => const SignInScreen(),
                         ),
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_forward,
                       color: Color(0xffdda006),
                       size: 30,
@@ -70,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
                     "أنشئ حساباََ باستخدام رقم الجوال",
                     textAlign: TextAlign.right,
                     style: GoogleFonts.vazirmatn(
-                      color: Color(0xb2f0f0f0),
+                      color: const Color(0xb2f0f0f0),
                       textStyle: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -86,36 +81,36 @@ class SignUpScreen extends StatelessWidget {
               child: Container(
                 height: h * 0.72,
                 width: w,
-                color: Color(0xff272727),
+                color: const Color(0xff272727),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    InputBox(
+                    const InputBox(
                       'الاسم الرباعي',
                       TextInputType.text,
                       false,
                     ),
                     SizedBox(height: h * 0.02),
-                    InputBox(
+                    const InputBox(
                       'رقم الجوال',
                       TextInputType.phone,
                       false,
                     ),
                     SizedBox(height: h * 0.02),
-                    InputBox(
+                    const InputBox(
                       'البريد الإلكتروني',
                       TextInputType.emailAddress,
                       false,
                     ),
                     SizedBox(height: h * 0.02),
-                    InputBox(
+                    const InputBox(
                       'كلمة المرور',
                       TextInputType.visiblePassword,
                       true,
                     ),
                     SizedBox(height: h * 0.02),
-                    InputBox(
+                    const InputBox(
                       'أعد تكرار كلمة المرور',
                       TextInputType.visiblePassword,
                       true,
@@ -126,7 +121,7 @@ class SignUpScreen extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => SendCodeScreen(),
+                            builder: (context) => const SendCodeScreen(),
                           ),
                         );
                       },
@@ -139,7 +134,7 @@ class SignUpScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.vazirmatn(
                               color: Colors.black,
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w700,
                               ),

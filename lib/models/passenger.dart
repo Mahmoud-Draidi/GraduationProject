@@ -50,7 +50,7 @@ class Passenger {
       'phone': phone,
       'email': email,
       'password': password,
-      'booksList': booksList!.map((x) => x?.toMap()).toList(),
+      'booksList': booksList!.map((x) => x.toMap()).toList(),
       'rate': rate,
     };
   }

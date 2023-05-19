@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/screens/common_screens/map_screen.dart';
 import 'package:mowasulatuna/widgets/driver_widgets/easy_screen_widgets/circle_button.dart';
@@ -8,6 +7,8 @@ import 'know_screen.dart';
 import 'sign_in_screen.dart';
 
 class EasyBookingScreen extends StatelessWidget {
+  const EasyBookingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -32,7 +33,7 @@ class EasyBookingScreen extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SignInScreen(),
+                    builder: (context) => const SignInScreen(),
                   ),
                 );
               },
@@ -51,7 +52,7 @@ class EasyBookingScreen extends StatelessWidget {
           ),
           Positioned(
               bottom: h/11,
-              child: Container(
+              child: SizedBox(
                 width: w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +62,7 @@ class EasyBookingScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MapScreen(),
+                          builder: (context) => const MapScreen(),
                         ),
                       );
                     }),
@@ -70,7 +71,7 @@ class EasyBookingScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => KnowScreen(),
+                          builder: (context) => const KnowScreen(),
                         ),
                       );
                     }),
@@ -82,7 +83,7 @@ class EasyBookingScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => EasyScreen(),
+                          builder: (context) => const EasyScreen(),
                         ),
                       );
                     }),
@@ -98,7 +99,7 @@ class EasyBookingScreen extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => KnowScreen(),
+                    builder: (context) => const KnowScreen(),
                   ),
                 );
               },
@@ -107,7 +108,7 @@ class EasyBookingScreen extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  border: Border.all(color: Color(0x7f000000), width: 1, ),
+                  border: Border.all(color: const Color(0x7f000000), width: 1, ),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x3f000000),

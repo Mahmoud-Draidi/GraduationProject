@@ -1,20 +1,18 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/providers/sned_code_provider.dart';
-import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
-import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:mowasulatuna/widgets/driver_widgets/sign_in_screen_widgets/inputBox.dart';
 import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
 import 'package:provider/provider.dart';
 
-import '../../firebase_services/firestore_helper.dart';
 
 class SendCodeScreen extends StatelessWidget {
+  const SendCodeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<SendCodeProvider>(context);
@@ -38,11 +36,11 @@ class SendCodeScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUpScreen(),
+                          builder: (context) => const SignUpScreen(),
                         ),
                       );
                     },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_forward,
                       color: Color(0xffdda006),
                       size: 30,
@@ -72,7 +70,7 @@ class SendCodeScreen extends StatelessWidget {
                     "أدخل رمز التأكيد المرسل الى رقم جوالك",
                     textAlign: TextAlign.right,
                     style: GoogleFonts.vazirmatn(
-                      color: Color(0xb2f0f0f0),
+                      color: const Color(0xb2f0f0f0),
                       textStyle: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
@@ -88,12 +86,12 @@ class SendCodeScreen extends StatelessWidget {
               child: Container(
                 height: h * 0.72,
                 width: w,
-                color: Color(0xff272727),
+                color: const Color(0xff272727),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    InputBox(
+                    const InputBox(
                       'رمز التأكيد من الجوال',
                       TextInputType.text,
                       false,
@@ -108,7 +106,7 @@ class SendCodeScreen extends StatelessWidget {
                           pro.isInDuration ? ' ! ' : '',
                           textAlign: TextAlign.left,
                           style: GoogleFonts.vazirmatn(
-                            color: Color(0xb2f0f0f0),
+                            color: const Color(0xb2f0f0f0),
                             textStyle: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w700,
@@ -119,7 +117,7 @@ class SendCodeScreen extends StatelessWidget {
                           (pro.isInDuration ? 'تمت إعادة الإرسال' : ''),
                           textAlign: TextAlign.left,
                           style: GoogleFonts.vazirmatn(
-                            color: Color(0xb2f0f0f0),
+                            color: const Color(0xb2f0f0f0),
                             textStyle: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
@@ -143,13 +141,13 @@ class SendCodeScreen extends StatelessWidget {
                               child: Center(
                                   child: pro.numOfClicksOnResendCode < 3
                                       ? (pro.isInDuration
-                                          ? TimerScreen()
+                                          ? const TimerScreen()
                                           : Text(
                                               "إعادة الإرسال",
                                               textAlign: TextAlign.center,
                                               style: GoogleFonts.vazirmatn(
-                                                color: Color(0xffdda006),
-                                                textStyle: TextStyle(
+                                                color: const Color(0xffdda006),
+                                                textStyle: const TextStyle(
                                                   fontSize: 22,
                                                   fontWeight: FontWeight.w700,
                                                 ),
@@ -159,9 +157,9 @@ class SendCodeScreen extends StatelessWidget {
                                           "لا يمكنك إعادة الارسال",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.vazirmatn(
-                                            color: Color(0xffdda006)
+                                            color: const Color(0xffdda006)
                                                 .withOpacity(0.5),
-                                            textStyle: TextStyle(
+                                            textStyle: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w700,
                                             ),
@@ -203,7 +201,7 @@ class SendCodeScreen extends StatelessWidget {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => RHome(),
+                                  builder: (context) => const RHome(),
                                 ),
                               );
                             },
@@ -216,7 +214,7 @@ class SendCodeScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.vazirmatn(
                                     color: Colors.black,
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w700,
                                     ),

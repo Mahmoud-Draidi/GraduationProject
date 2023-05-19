@@ -1,16 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/providers/sign_in_provider.dart';
-import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
-import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
+import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
+//import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:mowasulatuna/widgets/driver_widgets/sign_in_screen_widgets/inputBox.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<SignInProvider>(context);
@@ -42,7 +43,7 @@ class SignInScreen extends StatelessWidget {
               child: Container(
                 height: h * 0.72,
                 width: w,
-                color: Color(0xff272727),
+                color: const Color(0xff272727),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -50,13 +51,13 @@ class SignInScreen extends StatelessWidget {
                     SizedBox(
                       height: h * 0.04,
                     ),
-                    InputBox(
+                    const InputBox(
                       'رقم الجوال',
                       TextInputType.phone,
                       false,
                     ),
                     SizedBox(height: h * 0.02),
-                    InputBox(
+                    const InputBox(
                       'كلمة المرور',
                       TextInputType.visiblePassword,
                       true,
@@ -66,7 +67,7 @@ class SignInScreen extends StatelessWidget {
                       margin: EdgeInsets.only(right: w * 0.13),
                       child: TextButton(
                         onPressed: () {
-                          if(!pro.isForgetPassClicked){
+                          if (!pro.isForgetPassClicked) {
                             pro.setIsForgetPassClicked();
                             pro.incNumOfClicksOnForgetPass();
                             Timer(const Duration(seconds: 3), () {
@@ -78,24 +79,30 @@ class SignInScreen extends StatelessWidget {
                           "هل نسيت كلمة المرور؟",
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                            color:pro.numOfClicksOnForgetPass<=3? Color(0xff70a8f1) : Color(0xff70a8f1).withOpacity(0.5) ,
+                            color: pro.numOfClicksOnForgetPass <= 3
+                                ? const Color(0xff70a8f1)
+                                : const Color(0xff70a8f1).withOpacity(0.5),
                             fontSize: 14,
                           ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: pro.isForgetPassClicked&&pro.numOfClicksOnForgetPass<=3?h/5-h/35 : h / 5,
+                      height: pro.isForgetPassClicked &&
+                              pro.numOfClicksOnForgetPass <= 3
+                          ? h / 5 - h / 35
+                          : h / 5,
                     ),
-                    if (pro.numOfClicksOnForgetPass <= 3 && pro.isForgetPassClicked)
-                      Container(
-                        height: h/35,
+                    if (pro.numOfClicksOnForgetPass <= 3 &&
+                        pro.isForgetPassClicked)
+                      SizedBox(
+                        height: h / 35,
                         child: Center(
                           child: Text(
                             "تم ارسال كلمة المرور الى رقم جوالك",
                             textAlign: TextAlign.right,
                             style: GoogleFonts.vazirmatn(
-                              color: Color(0xb2f0f0f0),
+                              color: const Color(0xb2f0f0f0),
                               textStyle: const TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w700,
@@ -104,7 +111,9 @@ class SignInScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    SizedBox(height: h/40,),
+                    SizedBox(
+                      height: h / 40,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -117,8 +126,8 @@ class SignInScreen extends StatelessWidget {
                                   "مستخدم جديد؟",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.vazirmatn(
-                                    color: Color(0xffdda006),
-                                    textStyle: TextStyle(
+                                    color: const Color(0xffdda006),
+                                    textStyle: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -130,7 +139,7 @@ class SignInScreen extends StatelessWidget {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SignUpScreen(),
+                                  builder: (context) => const SignUpScreen(),
                                 ),
                               );
                             },
@@ -142,7 +151,7 @@ class SignInScreen extends StatelessWidget {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MyBus(),
+                                  builder: (context) => const ProfileScreen(),
                                 ),
                               );
                             },
@@ -155,7 +164,7 @@ class SignInScreen extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.vazirmatn(
                                     color: Colors.black,
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w700,
                                     ),

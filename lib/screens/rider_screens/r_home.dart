@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/book_provider.dart';
@@ -242,10 +243,8 @@ class RHome extends StatelessWidget {
             ),
           ],
         ),
-        endDrawer: Drawer(
-          backgroundColor: Color(0x3f000000),
-          child: Container(),
-        ),
+        endDrawer: MyDrawer()
+        ,
       ),
     );
   }

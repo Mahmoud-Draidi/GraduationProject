@@ -19,6 +19,8 @@ import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 
+import 'screens/common_screens/edit_profile_screen.dart';
+
 // import 'package:firebase_core/firebase_core.dart';
 // import 'firebase_options.dart';
 
@@ -79,7 +81,7 @@ class MyApp extends StatelessWidget {
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => BookScreen() : (context) => RHome(),
+        'home' : isSignedIn == false ? (context) => SignInScreen() : (context) => RHome(),
         'intro' : (context) => LogoScreen(),
       },
     );

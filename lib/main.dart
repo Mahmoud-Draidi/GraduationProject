@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mowasulatuna/providers/book_provider.dart';
 import 'package:mowasulatuna/providers/input_box_provider.dart';
 import 'package:mowasulatuna/providers/seat_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
@@ -11,6 +12,8 @@ import 'package:mowasulatuna/screens/common_screens/easy_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/logo_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
+import 'package:mowasulatuna/screens/rider_screens/book_details.dart';
+import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,6 +55,7 @@ Future<void> main() async{
         ChangeNotifierProvider(create: (_) => SignInScreenProvider()),
         ChangeNotifierProvider(create: (_) => SignUpScreenProvider()),
         ChangeNotifierProvider(create: (_) => SeatProvider()),
+        ChangeNotifierProvider(create: (_) => BookProvider()),
       ],
       child: const MyApp(),
     ),
@@ -75,7 +79,7 @@ class MyApp extends StatelessWidget {
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => SignInScreen() : (context) => RHome(),
+        'home' : isSignedIn == false ? (context) => BookScreen() : (context) => RHome(),
         'intro' : (context) => LogoScreen(),
       },
     );

@@ -14,8 +14,8 @@ import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/common_widgets/inputBox.dart';
-import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
+import 'package:mowasulatuna/widgets/inputBox.dart';
+import 'package:mowasulatuna/widgets/timer.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/sign_up_screen_provider.dart';

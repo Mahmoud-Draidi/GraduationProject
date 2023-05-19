@@ -14,6 +14,8 @@ import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_details.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
+import 'package:mowasulatuna/providers/timer_provider.dart';
+import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +28,7 @@ int? initScreen;
 
 bool? isSignedIn;
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //Intro Screen First time opened or when reInstalled
@@ -39,9 +41,9 @@ Future<void> main() async{
   );
 
   var user = FirebaseAuth.instance.currentUser;
-  if(user == null){
+  if (user == null) {
     isSignedIn = false;
-  }else{
+  } else {
     isSignedIn = true;
   }
 
@@ -56,6 +58,7 @@ Future<void> main() async{
         ChangeNotifierProvider(create: (_) => SignUpScreenProvider()),
         ChangeNotifierProvider(create: (_) => SeatProvider()),
         ChangeNotifierProvider(create: (_) => BookProvider()),
+        ChangeNotifierProvider(create: (_) => TimerProvider()),
       ],
       child: const MyApp(),
     ),
@@ -75,12 +78,19 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       debugShowCheckedModeBanner: false,
-
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => BookScreen() : (context) => RHome(),
-        'intro' : (context) => LogoScreen(),
+        'home': isSignedIn == false
+            ? (context) => SendCodeScreen(
+                  verificationID: '111111',
+                  name: 'hello',
+                  phone: '+972599540968',
+                  email: 'bn@gmail.com',
+                  pass: '123456aA!',
+                )
+            : (context) => RHome(),
+        'intro': (context) => LogoScreen(),
       },
     );
   }

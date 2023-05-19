@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/providers/book_provider.dart';
-import 'package:mowasulatuna/screens/rider_screens/timer_provider.dart';
+import 'package:mowasulatuna/providers/timer_provider.dart';
 import 'package:provider/provider.dart';
 
 class MyTimer extends StatelessWidget {

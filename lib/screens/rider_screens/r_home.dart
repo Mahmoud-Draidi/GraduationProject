@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import '../../providers/book_provider.dart';
 
 class RHome extends StatelessWidget {
@@ -66,7 +66,14 @@ class RHome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>  MyInfoScreen(),
+                              ),
+                            );
+                        },
                         child: Container(
                           height: h * 0.055,
                           width: w * 0.4,

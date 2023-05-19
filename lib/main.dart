@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
-
+import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import 'screens/common_screens/edit_profile_screen.dart';
 
 // import 'package:firebase_core/firebase_core.dart';

@@ -27,11 +27,16 @@ class SendCodeScreen extends StatelessWidget {
   final String email;
   final String pass;
 
-  SendCodeScreen({super.key, required this.verificationID, required this.name, required this.phone, required this.email, required this.pass});
+  SendCodeScreen(
+      {super.key,
+      required this.verificationID,
+      required this.name,
+      required this.phone,
+      required this.email,
+      required this.pass});
 
   @override
   Widget build(BuildContext context) {
-
     signUp() async {
       FirebaseAuth auth = FirebaseAuth.instance;
       try {
@@ -50,7 +55,7 @@ class SendCodeScreen extends StatelessWidget {
             });
         // adding
         final credential =
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: pass,
         );
@@ -206,32 +211,33 @@ class SendCodeScreen extends StatelessWidget {
                                   ? Colors.black.withOpacity(0.4)
                                   : Colors.black,
                               child: Center(
-                                  child: pro.numOfClicksOnResendCode < 3
-                                      ? (pro.isInDuration
-                                          ? TimerScreen()
-                                          : Text(
-                                              "إعادة الإرسال",
-                                              textAlign: TextAlign.center,
-                                              style: GoogleFonts.vazirmatn(
-                                                color: Color(0xffdda006),
-                                                textStyle: TextStyle(
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
+                                child: pro.numOfClicksOnResendCode < 3
+                                    ? (pro.isInDuration
+                                        ? TimerScreen()
+                                        : Text(
+                                            "إعادة الإرسال",
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.vazirmatn(
+                                              color: Color(0xffdda006),
+                                              textStyle: TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w700,
                                               ),
-                                            ))
-                                      : Text(
-                                          "لا يمكنك إعادة الارسال",
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.vazirmatn(
-                                            color: Color(0xffdda006)
-                                                .withOpacity(0.5),
-                                            textStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w700,
                                             ),
+                                          ))
+                                    : Text(
+                                        "لا يمكنك إعادة الارسال",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.vazirmatn(
+                                          color: Color(0xffdda006)
+                                              .withOpacity(0.5),
+                                          textStyle: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w700,
                                           ),
-                                        )),
+                                        ),
+                                      ),
+                              ),
                             ),
                             onTap: () {
                               if (pro.isInDuration ||
@@ -252,18 +258,20 @@ class SendCodeScreen extends StatelessWidget {
                               print('code :  ${controllerCode.text}');
                               pro2.setShowDialogFalse();
 
-                              try{
+                              try {
                                 FirebaseAuth auth = FirebaseAuth.instance;
                                 PhoneAuthCredential credential =
-                                PhoneAuthProvider.credential(
+                                    PhoneAuthProvider.credential(
                                   verificationId: verificationID,
                                   smsCode: controllerCode.text,
                                 );
-                              }on FirebaseAuthException catch(e){
-                                print('fire auth error eeeeeeeeeeeeeeeeeeeeeeeeeee');
+                              } on FirebaseAuthException catch (e) {
+                                print(
+                                    'fire auth error eeeeeeeeeeeeeeeeeeeeeeeeeee');
                                 print(e.code);
-                              }catch(e){
-                                print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+                              } catch (e) {
+                                print(
+                                    'eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
                                 print(e.toString());
                               }
 
@@ -282,19 +290,20 @@ class SendCodeScreen extends StatelessWidget {
                                   });
                               // await auth.signInWithCredential(credential);
                               UserCredential? response = await signUp();
-                              if(response!=null){
+                              if (response != null) {
                                 // Passenger p = Passenger(name: controllerName.text,);
-                                await FirebaseFirestore.instance.collection('passengers').add(
-                                    {
-                                      'name': name,
-                                      'phone': phone,
-                                      'email' : email,
-                                      'password' : pass,
-                                    }
-                                ).then((_) {
+                                await FirebaseFirestore.instance
+                                    .collection('passengers')
+                                    .add({
+                                  'name': name,
+                                  'phone': phone,
+                                  'email': email,
+                                  'password': pass,
+                                }).then((_) {
                                   print('User added to Firestore successfully');
                                 }).catchError((error) {
-                                  print('Error adding user to Firestore: $error');
+                                  print(
+                                      'Error adding user to Firestore: $error');
                                 });
                                 Navigator.pushReplacement(
                                   context,

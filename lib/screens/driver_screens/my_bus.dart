@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mowasulatuna/widgets/seat.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../providers/seat_provider.dart';
@@ -105,10 +105,8 @@ class MyBus extends StatelessWidget {
               ),
             ),
           ),
-          endDrawer: Drawer(
-            backgroundColor: Color(0x3f000000),
-            child: Container(),
-          )),
+          endDrawer: MyDrawer()
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/book_provider.dart';
@@ -133,7 +134,7 @@ class RHome extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: h * 0.69,
+                    height: h * 0.65,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -183,37 +184,35 @@ class RHome extends StatelessWidget {
                 ],
               ),
             ),
-            if(pro.isBooked) Positioned(
-              top: h*0.065,
-              right: w*0.0583,
-              child: GestureDetector(
-                onTap: (){
-
-                },
-                child: Container(
-                  height: h*0.15,
-                  width: w*0.415,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/Group_3.png',
+            if (pro.isBooked)
+              Positioned(
+                top: h * 0.065,
+                right: w * 0.0583,
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    height: h * 0.15,
+                    width: w * 0.415,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                          'assets/images/Group_3.png',
+                        ),
+                        fit: BoxFit.fill,
                       ),
-                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
               ),
-            ),
-           if(pro.isOrangeCase) Positioned(
-                top: h*0.065,
-                right: w*0.0583,
+            if (pro.isOrangeCase)
+              Positioned(
+                top: h * 0.065,
+                right: w * 0.0583,
                 child: GestureDetector(
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                   child: Container(
-                    height: h*0.15,
-                    width: w*0.415,
+                    height: h * 0.15,
+                    width: w * 0.415,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
@@ -224,28 +223,26 @@ class RHome extends StatelessWidget {
                     ),
                   ),
                 ),
-            ),
-            if(pro.isOrangeCase)Positioned(
-              right: w*0.25,
-              top: h*0.093,
-              child: Text(
-                "10:50",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.vazirmatn(
-                  color: Colors.black,
-                  textStyle: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
+              ),
+            if (pro.isOrangeCase)
+              Positioned(
+                right: w * 0.25,
+                top: h * 0.093,
+                child: Text(
+                  "10:50",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.vazirmatn(
+                    color: Colors.black,
+                    textStyle: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
-        endDrawer: Drawer(
-          backgroundColor: Color(0x3f000000),
-          child: Container(),
-        ),
+        endDrawer: MyDrawer(),
       ),
     );
   }

@@ -7,13 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
-import 'package:mowasulatuna/screens/rider_screens/history_details.dart';
+import 'package:mowasulatuna/screens/driver_screens/history_details.dart';
 import '../../providers/book_provider.dart';
-import 'r_home.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
+class HelpScreen extends StatelessWidget {
+  const HelpScreen({super.key});
   
 
   @override
@@ -41,8 +40,7 @@ class HistoryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            title: Column(
               children: [
                 Container(
                   margin: EdgeInsets.only(
@@ -52,27 +50,6 @@ class HistoryScreen extends StatelessWidget {
                   width: w * 0.38,
                   child: Image.asset('assets/images/logoText.png'),
                 ),
-                SizedBox(
-                  width: w*.05,
-                ),
-                Container(
-                  padding: EdgeInsets.only(right: w * 0.09),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  RHome(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xffdda006),
-                      size: 25,
-                    ),
-                  ),
-                ),
               ],
             ),
             centerTitle: true,
@@ -81,9 +58,8 @@ class HistoryScreen extends StatelessWidget {
       
       body: Column(
         children: [
-          
           Container(
-          height: h*0.861,
+          height: h*0.86,
           width: w,
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -97,53 +73,40 @@ class HistoryScreen extends StatelessWidget {
               Expanded(
                 child: Stack(
                   children: [GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  const HistoryDetails(),
-                        ),
-                      );
-                    },
+                    onTap: (){},
                     child: Container(
+                      height: h*.7,
                       margin: const EdgeInsets.only(top: 10, bottom: 5),
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
-                              'assets/images/OneOfHistory.png'
+                              'assets/images/inputProblem.png'
                           ),
                         ),
                       ),
                     ),),
                     Positioned(
-                      top: h*0.43,
-                      right: w*0.15,
-                      child: Text(
-                        pro.getDetailsDayDate(),
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.vazirmatn(
-                          color: const Color(0xb2f0f0f0),
-                          textStyle: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
+                      top: h*.775,
+                      width: w,
+                      child: GestureDetector(
+                        child: Container(
+                          height: h * 0.086,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/sendButton.png'),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    Positioned(
-                      top: h*0.43,
-                      right: w*0.59,
-                      child: Text(
-                        pro.getDetailsBookTime(),
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.vazirmatn(
-                          color: const Color(0xb2f0f0f0),
-                          textStyle: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
+                        onTap: () {
+                          // Navigator.pushReplacement(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //         builder: (context) =>  MyInfoScreenTwo(),
+                          //       ),
+                          //     );
+                        },
                       ),
                     ),
                   ],

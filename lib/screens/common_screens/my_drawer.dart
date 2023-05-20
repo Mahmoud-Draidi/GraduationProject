@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/screens/common_screens/help_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
+import 'package:mowasulatuna/screens/common_screens/question.dart';
 import 'package:mowasulatuna/screens/rider_screens/history.dart';
+
+import '../rider_screens/r_home.dart';
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
@@ -65,7 +69,12 @@ class MyDrawer extends StatelessWidget {
                         Container(
                           child: IconButton(
                             onPressed: () {
-
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>  RHome(),
+                                ),
+                              );
                             },
                             icon: const Icon(
                               Icons.arrow_forward,
@@ -213,7 +222,14 @@ class MyDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const QuestionScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       "اسئلة متكررة",
                       style: GoogleFonts.vazirmatn(
@@ -254,7 +270,14 @@ class MyDrawer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HelpScreen(),
+                        ),
+                      );
+                    },
                     child: Text(
                       "طلب المساعدة",
                       style: GoogleFonts.vazirmatn(

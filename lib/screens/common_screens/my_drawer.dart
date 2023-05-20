@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/help_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
+import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
+
+import '../rider_screens/history.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});

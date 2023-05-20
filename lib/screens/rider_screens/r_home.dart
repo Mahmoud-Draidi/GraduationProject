@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import '../../providers/book_provider.dart';
 
 class RHome extends StatelessWidget {

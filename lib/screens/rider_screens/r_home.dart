@@ -7,6 +7,7 @@ import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import '../../providers/book_provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RHome extends StatelessWidget {
   @override

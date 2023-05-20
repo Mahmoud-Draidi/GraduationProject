@@ -23,58 +23,44 @@ class HistoryDetails extends StatelessWidget {
 
 
     return Scaffold(
-      
-      body: Column(
-        children: [
-          Container(
-            width: w,
-            height: h * 0.2,
-            color: Colors.black,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(h * 0.10), // here the desired height
+          child: AppBar(
+            flexibleSpace: Container(
+              height: h * 0.13,
+              width: w,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xff1a2636).withOpacity(0.8),
+                    Color(0xff434343).withOpacity(0.8),
+                  ],
+                ),
+              ),
+            ),
+            title: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.only(right: w * 0.09),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          //MyBus() orrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr RHome()
-                          builder: (context) =>  HistoryScreen(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xffdda006),
-                      size: 30,
-                    ),
+                  margin: EdgeInsets.only(
+                    top: h * 0.015,
                   ),
-                ),
-                SizedBox(
-                  height: h / 170,
-                ),
-                Container(
-                  padding: EdgeInsets.only(right: w * 0.13),
-                  child: Text(
-                    "سجل الرحلات",
-                    textAlign: TextAlign.right,
-                    style: GoogleFonts.vazirmatn(
-                      color: const Color(0xfff0f0f0),
-                      textStyle: const TextStyle(
-                        fontSize: 36,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
+                  height: h * 0.053,
+                  width: w * 0.38,
+                  child: Image.asset('assets/images/logoText.png'),
                 ),
               ],
             ),
+            centerTitle: true,
           ),
+        ),
+      
+      body: Column(
+        children: [
+          
           Container(
-          height: h*0.8,
+          height: h*0.861,
           width: w,
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -89,9 +75,9 @@ class HistoryDetails extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 5),
-                      padding: EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.only(top: 10, bottom: 5),
+                      padding: const EdgeInsets.only(top: 30, bottom: 30),
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
                               'assets/images/historyDatailsForm.png'
@@ -100,7 +86,7 @@ class HistoryDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.23,
+                      top: h*0.26,
                       right: w*0.50,
                       child: Text(
                         pro.getDetailsDayDate(),
@@ -115,7 +101,7 @@ class HistoryDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.31,
+                      top: h*0.34,
                       right: w*0.50,
                       child: Text(
                         pro.getDetailsLocation(),
@@ -130,7 +116,7 @@ class HistoryDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.397,
+                      top: h*0.43,
                       right: w*0.50,
                       child: Text(
                         pro.getDetailsBookTime(),
@@ -145,7 +131,7 @@ class HistoryDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.483,
+                      top: h*0.513,
                       right: w*0.50,
                       child: Text(
                         pro.getDetailsNumOfPersons(),
@@ -160,7 +146,7 @@ class HistoryDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.568,
+                      top: h*0.598,
                       right: w*0.50,
                       child: Text(
                         pro.getDetailsExpectedBusTime(),
@@ -175,7 +161,7 @@ class HistoryDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.651,
+                      top: h*0.681,
                       right: w*0.50,
                       child: Text(
                         pro.getDetailsExpectedBusTime(),

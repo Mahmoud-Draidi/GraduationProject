@@ -303,8 +303,6 @@ class SignUpScreen extends StatelessWidget {
                                       'phone': controllerPhone.text,
                                       'email': controllerEmail.text,
                                       'password': controllerPass.text,
-                                      'books' : [],
-                                      'travels' : [],
                                     }).then((_) {
                                       print('User added to Firestore successfully');
                                     }).catchError((error) {

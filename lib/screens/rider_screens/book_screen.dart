@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
@@ -431,13 +433,14 @@ class BookScreen extends StatelessWidget {
                       top: h * 0.44,
                       right: w * 0.245,
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async{
                           pro.setCanCancelBook(0);
 
                           print(pro.locationValue);
                           print(pro.selectedTime);
                           print(pro.bookDay);
                           print(pro.numOfPersons);
+
 
                           Navigator.pushReplacement(
                             context,

@@ -64,19 +64,18 @@ class MyInfoScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
+
                       margin: const EdgeInsets.only(top: 10, bottom: 5),
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/Group_5.png'
-                          ),
+                          image: AssetImage('assets/images/Group_5.png'),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: h*0.095,
-                      right: w*0.23,
+                      top: h * 0.095,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsDayDate(),
                         textAlign: TextAlign.right,
@@ -90,8 +89,8 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.25,
-                      right: w*0.23,
+                      top: h * 0.25,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsLocation(),
                         textAlign: TextAlign.right,
@@ -105,8 +104,8 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.4,
-                      right: w*0.23,
+                      top: h * 0.4,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsBookTime(),
                         textAlign: TextAlign.right,
@@ -120,8 +119,8 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.55,
-                      right: w*0.23,
+                      top: h * 0.55,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsNumOfPersons(),
                         textAlign: TextAlign.right,
@@ -135,8 +134,8 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.705,
-                      right: w*0.23,
+                      top: h * 0.705,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsExpectedBusTime(),
                         textAlign: TextAlign.right,
@@ -181,11 +180,11 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>  MyInfoScreenTwo(),
-                              ),
-                            );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyInfoScreenTwo(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -193,11 +192,11 @@ class MyInfoScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>  MyInfoScreen(),
-                              ),
-                            );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyInfoScreen(),
+                          ),
+                        );
                       },
                       child: Container(
                         height: h * 0.086,

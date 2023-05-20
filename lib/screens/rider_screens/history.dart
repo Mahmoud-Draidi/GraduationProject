@@ -76,7 +76,7 @@ class HistoryScreen extends StatelessWidget {
           Container(
           height: h*0.8,
           width: w,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.png'),
               fit: BoxFit.cover,
@@ -92,14 +92,14 @@ class HistoryScreen extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  HistoryDetails(),
+                          builder: (context) =>  const HistoryDetails(),
                         ),
                       );
                     },
                     child: Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 5),
-                      padding: EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.only(top: 10, bottom: 5),
+                      padding: const EdgeInsets.only(top: 30, bottom: 30),
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
                               'assets/images/OneOfHistory.png'
@@ -114,7 +114,7 @@ class HistoryScreen extends StatelessWidget {
                         pro.getDetailsDayDate(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -129,7 +129,7 @@ class HistoryScreen extends StatelessWidget {
                         pro.getDetailsBookTime(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,

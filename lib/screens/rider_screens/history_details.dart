@@ -89,9 +89,9 @@ class HistoryDetails extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 5),
-                      padding: EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.only(top: 10, bottom: 5),
+                      padding: const EdgeInsets.only(top: 30, bottom: 30),
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage(
                               'assets/images/historyDatailsForm.png'

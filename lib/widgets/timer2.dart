@@ -46,29 +46,29 @@ class _TimerScreenState extends State<TimerScreen> {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "إعادة الإرسال",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.vazirmatn(
-                color: Color(0xffdda006).withOpacity(0.5),
-                textStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "إعادة الإرسال",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.vazirmatn(
+              color: Color(0xffdda006).withOpacity(0.5),
+              textStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
               ),
             ),
-            Text(
-              '$_start',
-              style: TextStyle(
-                fontSize: 22,
-                color: Color(0xb2f0f0f0),
-              ),
+          ),
+          Text(
+            '$_start',
+            style: TextStyle(
+              fontSize: 22,
+              color: Color(0xb2f0f0f0),
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
 }

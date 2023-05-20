@@ -13,8 +13,9 @@ import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/common_widgets/inputBox.dart';
-import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
+import 'package:mowasulatuna/widgets/inputBox.dart';
+import 'package:mowasulatuna/widgets/timer.dart';
+import 'package:mowasulatuna/widgets/timer2.dart';
 import 'package:provider/provider.dart';
 
 import '../../firebase_services/firestore_helper.dart';
@@ -37,6 +38,7 @@ class SendCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     signUp() async {
       FirebaseAuth auth = FirebaseAuth.instance;
       try {
@@ -293,8 +295,8 @@ class SendCodeScreen extends StatelessWidget {
                               if (response != null) {
                                 // Passenger p = Passenger(name: controllerName.text,);
                                 await FirebaseFirestore.instance
-                                    .collection('passengers')
-                                    .add({
+                                    .collection('passengers').doc(response.user!.uid)
+                                    .set({
                                   'name': name,
                                   'phone': phone,
                                   'email': email,

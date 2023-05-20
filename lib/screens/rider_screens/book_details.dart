@@ -1,6 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
+import 'package:mowasulatuna/providers/timer_provider.dart';
+import 'package:mowasulatuna/widgets/timer.dart';
+import 'package:mowasulatuna/widgets/timer2.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/book_provider.dart';
@@ -8,7 +14,24 @@ import '../../providers/book_provider.dart';
 class BookDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+
+    final pro2 = Provider.of<TimerProvider>(context);
     final pro = Provider.of<BookProvider>(context);
+
+    void startTimer() {
+      const oneSec = Duration(seconds: 1);
+      Timer.periodic(
+        oneSec,
+            (Timer timer) {
+          if (pro2.start == 0) {
+            pro2.cancelTimer();
+          } else {
+            pro2.decStart();
+          }
+        },
+      );
+    }
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Container(
@@ -68,15 +91,14 @@ class BookDetails extends StatelessWidget {
                       padding: EdgeInsets.only(top: 30, bottom: 30),
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/bookDatailsForm.png'
-                          ),
+                          image:
+                              AssetImage('assets/images/bookDatailsForm.png'),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: h*0.08,
-                      right: w*0.23,
+                      top: h * 0.08,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsDayDate(),
                         textAlign: TextAlign.right,
@@ -90,8 +112,8 @@ class BookDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.207,
-                      right: w*0.23,
+                      top: h * 0.207,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsLocation(),
                         textAlign: TextAlign.right,
@@ -105,8 +127,8 @@ class BookDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.337,
-                      right: w*0.23,
+                      top: h * 0.337,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsBookTime(),
                         textAlign: TextAlign.right,
@@ -120,8 +142,8 @@ class BookDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.465,
-                      right: w*0.23,
+                      top: h * 0.465,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsNumOfPersons(),
                         textAlign: TextAlign.right,
@@ -135,8 +157,8 @@ class BookDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.594,
-                      right: w*0.23,
+                      top: h * 0.594,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsExpectedBusTime(),
                         textAlign: TextAlign.right,
@@ -150,8 +172,8 @@ class BookDetails extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.715,
-                      right: w*0.23,
+                      top: h * 0.715,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsDriverName(),
                         textAlign: TextAlign.right,
@@ -167,79 +189,175 @@ class BookDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      child: Container(
-                        height: h * 0.086,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(15),
+              if (pro.canCancelBook==1)
+                GestureDetector(
+                  onTap: (){
+                    if(pro2.start>0){
+                      pro2.cancelTimer();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RHome(),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "إلغاء",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.vazirmatn(
-                                color: Color(0xffdda006),
-                                textStyle: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: w * 0.02,
-                            ),
-                            Icon(
-                              Icons.cancel_outlined,
-                              color: Colors.red.shade800,
-                              size: 30,
-                            ),
-                          ],
+                      );
+                    }
+                  },
+                  child: Container(
+                    height: h * 0.086,
+                    decoration: BoxDecoration(
+                      color: Color(0xffdda006),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MyTimer(30),
+                        SizedBox(
+                          width: w * 0.1,
                         ),
-                      ),
-                      onTap: () {},
+                        Text(
+                          "إلغاء الحجز",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.vazirmatn(
+                            color: Colors.black,
+                            textStyle: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: w * 0.02,
+                        ),
+                        Icon(
+                          Icons.cancel_outlined,
+                          color: Colors.red.shade800,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: w * 0.08,
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () async {},
-                      child: Container(
-                        height: h * 0.086,
-                        decoration: BoxDecoration(
-                          color: const Color(0xffdda006),
-                          borderRadius: BorderRadius.circular(15),
+                ),
+              if (pro.canCancelBook==2)
+                GestureDetector(
+                  child: Container(
+                    height: h * 0.086,
+                    decoration: BoxDecoration(
+                      color: Color(0xffdda006).withOpacity(0.4),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: w * 0.1,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "تأكيد الحجز",
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.vazirmatn(
-                                color: Colors.black,
-                                textStyle: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w700,
+                        Text(
+                          "إلغاء الحجز",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.vazirmatn(
+                            color: Colors.black.withOpacity(0.4),
+                            textStyle: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: w * 0.02,
+                        ),
+                        Icon(
+                          Icons.cancel_outlined,
+                          color: Colors.red.shade800.withOpacity(0.4),
+                          size: 30,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              if (pro.canCancelBook == 0)
+                Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        child: Container(
+                          height: h * 0.086,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "إلغاء",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.vazirmatn(
+                                  color: Color(0xffdda006),
+                                  textStyle: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Icon(
-                              Icons.check,
-                              color: Colors.green.shade800,
-                              size: 35,
-                            ),
-                          ],
+                              SizedBox(
+                                width: w * 0.02,
+                              ),
+                              Icon(
+                                Icons.cancel_outlined,
+                                color: Colors.red.shade800,
+                                size: 30,
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          pro.setCanCancelBook(1);
+                          startTimer();
+                          Timer(const Duration(seconds: 30), () {
+                            pro.setCanCancelBook(2);
+                          });
+                        },
+                        child: Container(
+                          height: h * 0.086,
+                          decoration: BoxDecoration(
+                            color: const Color(0xffdda006),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "تأكيد الحجز",
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.vazirmatn(
+                                  color: Colors.black,
+                                  textStyle: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              Icon(
+                                Icons.check,
+                                color: Colors.green.shade800,
+                                size: 35,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
             ],
           ),
         ),

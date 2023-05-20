@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mowasulatuna/screens/common_screens/easy_booking_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/know_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/map_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/easy_screen_widgets/circle_button.dart';
+import 'package:mowasulatuna/widgets/circle_button.dart';
 
 import 'sign_in_screen.dart';
 

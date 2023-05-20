@@ -14,8 +14,8 @@ import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
-import 'package:mowasulatuna/widgets/driver_widgets/common_widgets/inputBox.dart';
-import 'package:mowasulatuna/widgets/rider_widgets/send_code_screen_widgets/timer.dart';
+import 'package:mowasulatuna/widgets/inputBox.dart';
+import 'package:mowasulatuna/widgets/timer.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/sign_up_screen_provider.dart';
@@ -84,7 +84,7 @@ class SignUpScreen extends StatelessWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('please wiat!'),
+                title: Text('please wiat! fffffffffffffffffff' ),
                 content: Container(
                   height: 50,
                   child: Center(
@@ -95,10 +95,11 @@ class SignUpScreen extends StatelessWidget {
             });
         // adding
         final credential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+           await auth.createUserWithEmailAndPassword(
           email: controllerEmail.text,
           password: controllerPass.text,
         );
+        print('yyyyyyyyyyyyyyyyyyy  ${controllerEmail.text}');
         return credential;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
@@ -108,7 +109,7 @@ class SignUpScreen extends StatelessWidget {
             title: "Error",
             body: Text('The password is weak.'),
           ).show();
-          print('The password provided is too weak.');
+          print('The password provided is too weak. llllllllllllllllllll');
         } else if (e.code == 'email-already-in-use') {
           Navigator.of(context).pop();
           AwesomeDialog(
@@ -253,7 +254,6 @@ class SignUpScreen extends StatelessWidget {
                             .get()
                             .then((QuerySnapshot querySnapshot) async {
                           bool isPhoneExist = false; // Initialize the flag
-
                           querySnapshot.docs.forEach((doc) {
                             print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
                             print(doc["phone"]);
@@ -275,7 +275,7 @@ class SignUpScreen extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('please wait!'),
+                                    title: Text('please wait!...phone not exsits'),
                                     content: Container(
                                       height: 50,
                                       child: Center(
@@ -297,8 +297,8 @@ class SignUpScreen extends StatelessWidget {
                                   if (response != null) {
                                     // Passenger p = Passenger(name: controllerName.text,);
                                     await FirebaseFirestore.instance
-                                        .collection('passengers')
-                                        .add({
+                                        .collection('passengers').doc(response.user!.uid)
+                                        .set({
                                       'name': controllerName.text,
                                       'phone': controllerPhone.text,
                                       'email': controllerEmail.text,

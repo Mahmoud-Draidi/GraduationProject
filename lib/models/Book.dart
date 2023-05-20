@@ -7,6 +7,7 @@ class Book {
   String? bookTime;
   String? orderTime;
   int? numOfBookedPassengers;
+
   String? expectedTimeForNextBus;
   String? dirverName;
 

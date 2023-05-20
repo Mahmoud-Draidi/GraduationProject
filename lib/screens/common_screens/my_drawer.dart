@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/screens/common_screens/help_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 
-import '../driver_screens/history.dart';
+import '../rider_screens/history.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -99,7 +100,12 @@ class MyDrawer extends StatelessWidget {
                           Container(
                             child: IconButton(
                               onPressed: () {
-
+                                 Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>  RHome(),
+                                ),
+                              );
                               },
                               icon: const Icon(
                                 Icons.arrow_forward,
@@ -218,13 +224,41 @@ class MyDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          right: BorderSide(
-                            color: Color(0xffdda006), // Specify the border color
-                            width: 2.0, // Specify the border width
-                          ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.history,
+                        color: Color(0xffdda006),
+                      ),
+                      alignment: Alignment.topRight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: h * 0.022),
+              padding: EdgeInsets.only(right: w * 0.13),
+              width: w,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const QuestionScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "اسئلة متكررة",
+                      style: GoogleFonts.vazirmatn(
+                        color: const Color(0xfff0f0f0),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       child: IconButton(
@@ -259,13 +293,33 @@ class MyDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          right: BorderSide(
-                            color: Color(0xffdda006), // Specify the border color
-                            width: 2.0, // Specify the border width
-                          ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: h * 0.022),
+              padding: EdgeInsets.only(right: w * 0.13),
+              width: w,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HelpScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "طلب المساعدة",
+                      style: GoogleFonts.vazirmatn(
+                        color: const Color(0xfff0f0f0),
+                        textStyle: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                       child: IconButton(

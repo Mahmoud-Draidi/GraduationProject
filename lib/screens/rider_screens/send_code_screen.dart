@@ -295,8 +295,8 @@ class SendCodeScreen extends StatelessWidget {
                               if (response != null) {
                                 // Passenger p = Passenger(name: controllerName.text,);
                                 await FirebaseFirestore.instance
-                                    .collection('passengers')
-                                    .add({
+                                    .collection('passengers').doc(response.user!.uid)
+                                    .set({
                                   'name': name,
                                   'phone': phone,
                                   'email': email,

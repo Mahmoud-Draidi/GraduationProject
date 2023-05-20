@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/firebase_services/firestore_helper_driver.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
@@ -14,9 +15,12 @@ import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:mowasulatuna/widgets/inputBox.dart';
 import 'package:provider/provider.dart';
 
+import '../../firebase_services/firestore_helper.dart';
+
 class SignInScreen extends StatelessWidget {
   TextEditingController controllerPhone = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
+
   // TextEditingController controllerTest = TextEditingController();
 
   @override
@@ -65,7 +69,7 @@ class SignInScreen extends StatelessWidget {
                       false,
                       controllerPhone,
                       // pro.phoneErrorMessage,
-                        // pro.setPhoneErrorMessage,
+                      // pro.setPhoneErrorMessage,
                     ),
                     SizedBox(height: h * 0.02),
                     InputBox(
@@ -74,7 +78,7 @@ class SignInScreen extends StatelessWidget {
                       true,
                       controllerPass,
                       // pro.passErrorMessage,
-                        // pro.setPassErrorMessage,
+                      // pro.setPassErrorMessage,
                     ),
                     SizedBox(height: h * 0.04),
                     // MyInputBox('تجريب', TextInputType.emailAddress, false, controllerTest),
@@ -164,8 +168,148 @@ class SignInScreen extends StatelessWidget {
                         ),
                         Expanded(
                           child: GestureDetector(
+                            onTap: () async {
+                              final auth = await FirebaseAuth.instance;
+                              FirestoreHelperDriver firestoreHelperDriver =
+                                  FirestoreHelperDriver();
+                              firestoreHelperDriver
+                                  .getAllUsersFromFirestore()
+                                  .then((users) {
+                                for (Map<String, dynamic> user in users) {
+                                  print(user['password']);
+                                  print(controllerPass.text);
+                                  print(user['phone']);
+                                  print(controllerPhone.text);
+                                  print(user['email']);
+                                  if (controllerPhone.text == user['phone'] &&
+                                      controllerPass.text == user['password']) {
+                                    print(
+                                        '0000000000000000000000000000000000000000000000');
+                                    try {
+                                      auth.signInWithEmailAndPassword(
+                                        email: user['email'],
+                                        password: controllerPass.text,
+                                      );
 
-                            onTap: () async{
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MyBus(),
+                                        ),
+                                      );
+                                      print(
+                                          'ioooioioioioioioioioioioioioioioioioioioioioioioioioio');
+                                      print('in try   :  ${auth.currentUser}');
+                                      // credential.user.uid
+                                      // FirebaseAuth.instance.currentUser.uid
+                                    } on FirebaseAuthException catch (e) {
+                                      if (e.code == 'user-not-found') {
+                                        print('No user found for that email.');
+                                      } else if (e.code == 'wrong-password') {
+                                        print(
+                                            'Wrong password provided for that user.');
+                                      }
+                                    }
+                                  }
+                                }
+                              }).catchError((error) {
+                                print(
+                                    'Error retrieving users from Firestore: $error');
+                              });
+                              FirestoreHelper firestoreHelper =
+                                  FirestoreHelper();
+                              firestoreHelper
+                                  .getAllUsersFromFirestore()
+                                  .then((users) {
+                                for (Map<String, dynamic> user in users) {
+                                  print(user['password']);
+                                  print(controllerPass.text);
+                                  print(user['phone']);
+                                  print(controllerPhone.text);
+                                  print(user['email']);
+
+                                  print(
+                                      '0000000000000000000000000000000000000000000000');
+                                  try {
+                                    print(
+                                        'q[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[');
+                                    if (controllerPhone.text == user['phone'] &&
+                                        controllerPass.text ==
+                                            user['password']) {
+                                      auth.signInWithEmailAndPassword(
+                                        email: user['email'],
+                                        password: controllerPass.text,
+                                      );
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => RHome(),
+                                        ),
+                                      );
+                                      print(
+                                          'ioooioioioioioioioioioioioioioioioioioioioioioioioioio');
+                                      print('in try   :  ${auth.currentUser}');
+                                    } else if (controllerPhone.text ==
+                                            user['phone'] &&
+                                        controllerPass.text !=
+                                            user['password']) {
+                                      AwesomeDialog(
+                                        context: context,
+                                        title: "Error",
+                                        body: Text('your password is wrong'),
+                                      ).show();
+                                      print('your password is wrong');
+                                    } else {
+                                      AwesomeDialog(
+                                        context: context,
+                                        title: "Error",
+                                        body: Text('invalid phone number'),
+                                      ).show();
+                                      print('invalid phone number');
+                                    }
+
+                                    // credential.user.uid
+                                    // FirebaseAuth.instance.currentUser.uid
+                                  } on FirebaseAuthException catch (e) {
+                                    if (e.code == 'user-not-found') {
+                                      print('No user found for that email.');
+                                    } else if (e.code == 'wrong-password') {
+                                      print(
+                                          'Wrong password provided for that user.');
+                                    }
+                                  }
+                                }
+                              }).catchError((error) {
+                                print(
+                                    'Error retrieving users from Firestore: $error');
+                              });
+
+                              // print(FirebaseAuth.instance.currentUser);
+                              // try {
+                              //   final credential = await FirebaseAuth.instance
+                              //       .signInWithEmailAndPassword(
+                              //     email: '${controllerPhone.text}@gmail.com',
+                              //     password: controllerPass.text,
+                              //   );
+                              //   Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => RHome(),
+                              //     ),
+                              //   );
+                              //   print('ioooioioioioioioioioioioioioioioioioioioioioioioioioio');
+                              //   print(credential.user);
+                              //   // credential.user.uid
+                              //   // FirebaseAuth.instance.currentUser.uid
+                              // } on FirebaseAuthException catch (e) {
+                              //   if (e.code == 'user-not-found') {
+                              //     print('No user found for that email.');
+                              //   } else if (e.code == 'wrong-password') {
+                              //     print(
+                              //         'Wrong password provided for that user.');
+                              //   }
+                              // }
+
                               // pro.setShowDialogTrue();
                               // if(pro.showDialog){
                               //   showDialog(
@@ -179,35 +323,29 @@ class SignInScreen extends StatelessWidget {
                               //   );
                               // };
 
-                            //   FirebaseAuth auth = FirebaseAuth.instance;
-                            //   await FirebaseAuth.instance.verifyPhoneNumber(
-                            //     phoneNumber: controllerPhone.text,
-                            //     verificationCompleted: (PhoneAuthCredential credential) async{
-                            //       print('111111111111111111111111111111111111111111');
-                            //       await auth.signInWithCredential(credential);
-                            //     },
-                            //     verificationFailed: (FirebaseAuthException e) {
-                            //       print('222222222222222222222222222222222');
-                            //         print(e.code);
-                            //       // pro.setShowDialogFalse();
-                            //     },
-                            //     codeSent: (String verificationId, int? resendToken) {
-                            //       print('333333333333333333333333333333333333333');
-                            //       // pro.setShowDialogFalse();
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => RHome(),
-                                    ),
-                                  );
-                            //     },
-                            //     codeAutoRetrievalTimeout: (String verificationId) {
-                            //     },
-                            //     timeout: const Duration(seconds: 60),
-                            //   );
-                            //
-                            },
+                              //   FirebaseAuth auth = FirebaseAuth.instance;
+                              //   await FirebaseAuth.instance.verifyPhoneNumber(
+                              //     phoneNumber: controllerPhone.text,
+                              //     verificationCompleted: (PhoneAuthCredential credential) async{
+                              //       print('111111111111111111111111111111111111111111');
+                              //       await auth.signInWithCredential(credential);
+                              //     },
+                              //     verificationFailed: (FirebaseAuthException e) {
+                              //       print('222222222222222222222222222222222');
+                              //         print(e.code);
+                              //       // pro.setShowDialogFalse();
+                              //     },
+                              //     codeSent: (String verificationId, int? resendToken) {
+                              //       print('333333333333333333333333333333333333333');
+                              //       // pro.setShowDialogFalse();
 
+                              //     },
+                              //     codeAutoRetrievalTimeout: (String verificationId) {
+                              //     },
+                              //     timeout: const Duration(seconds: 60),
+                              //   );
+                              //
+                            },
                             child: Container(
                               height: h * 0.086,
                               color: const Color(0xffdda006),
@@ -354,7 +492,6 @@ class SignInScreen extends StatelessWidget {
 //     ],
 //   ),
 // ),
-
 
 class LoadingDialog {
   static void showLoadingDialog(BuildContext context, String message) {

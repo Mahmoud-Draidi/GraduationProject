@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class FirestoreHelper {
-  static final FirestoreHelper _instance = FirestoreHelper._internal();
+class FirestoreHelperDriver {
+  static final FirestoreHelperDriver _instance = FirestoreHelperDriver._internal();
 
-  factory FirestoreHelper() {
+  factory FirestoreHelperDriver() {
     return _instance;
   }
 
-  FirestoreHelper._internal();
+  FirestoreHelperDriver._internal();
 
-  final CollectionReference _usersCollection =
-  FirebaseFirestore.instance.collection('passengers');
+  final CollectionReference _driverCollection =
+  FirebaseFirestore.instance.collection('drivers');
 
   Future<void> addUserToFirestore(Map<String, dynamic> map) async {
-    await _usersCollection.add(map);
+    await _driverCollection.add(map);
   }
 
   Future<List<Map<String, dynamic>>> getAllUsersFromFirestore() async {
-    final QuerySnapshot snapshot = await _usersCollection.get();
+    final QuerySnapshot snapshot = await _driverCollection.get();
     final List<QueryDocumentSnapshot> documents = snapshot.docs;
     return documents.map((doc) => doc.data() as Map<String, dynamic>).toList();
   }

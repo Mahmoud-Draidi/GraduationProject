@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/seat_provider.dart';
+import '../../widgets/seat.dart';
+import '../common_screens/my_drawer.dart';
 
 class MyBus extends StatelessWidget {
   @override

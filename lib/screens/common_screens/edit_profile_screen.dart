@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
 
-import '../../widgets/driver_widgets/common_widgets/inputBox.dart';
+import '../../widgets/inputBox.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class EditProfileScreen extends StatelessWidget {

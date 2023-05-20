@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,128 +61,132 @@ class RHome extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: h * 0.055,
-                          width: w * 0.4,
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF414141),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "معلومات",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.vazirmatn(
-                                  color: Color(0xb2f0f0f0),
-                                  textStyle: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: h * 0.055,
+                            width: w * 0.4,
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF414141),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  "معلومات",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.vazirmatn(
+                                    color: Color(0xb2f0f0f0),
+                                    textStyle: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
                                 ),
+                                Icon(
+                                  Icons.message,
+                                  color: Color(0xffdda006),
+                                  // size: 20,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: h * 0.055,
+                            width: w * 0.4,
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF414141),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  "احجز مقعدك",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.vazirmatn(
+                                    color: Color(0xb2f0f0f0),
+                                    textStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: Image.asset(
+                                    'assets/images/Vector.png',
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: h * 0.65,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(width: w * 0.01),
+                        GestureDetector(
+                          onTap: () {
+                          },
+                          child: Container(
+                            height: h * 0.055,
+                            width: w * 0.17,
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF414141),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/images/mdi_bus-marker.png',
+                                fit: BoxFit.fill,
                               ),
-                              Icon(
-                                Icons.message,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: w * 0.01),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: h * 0.055,
+                            width: w * 0.17,
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            decoration: BoxDecoration(
+                              color: Color(0xFF414141),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.location_history,
                                 color: Color(0xffdda006),
+                                size: 30,
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: h * 0.055,
-                          width: w * 0.4,
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF414141),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                "احجز مقعدك",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.vazirmatn(
-                                  color: Color(0xb2f0f0f0),
-                                  textStyle: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                              Center(
-                                child: Image.asset(
-                                  'assets/images/Vector.png',
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: h * 0.65,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(width: w * 0.01),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: h * 0.055,
-                          width: w * 0.17,
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF414141),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              'assets/images/mdi_bus-marker.png',
-                              fit: BoxFit.fill,
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(width: w * 0.01),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          height: h * 0.055,
-                          width: w * 0.17,
-                          padding: EdgeInsets.only(left: 10, right: 10),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF414141),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Center(
-                            child: Icon(
-                              Icons.location_history,
-                              color: Color(0xffdda006),
-                              size: 30,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: w * 0.01),
-                    ],
-                  ),
-                ],
+                        SizedBox(width: w * 0.01),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             if (pro.isBooked)
@@ -209,7 +214,9 @@ class RHome extends StatelessWidget {
                 top: h * 0.065,
                 right: w * 0.0583,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: (){
+
+                  },
                   child: Container(
                     height: h * 0.15,
                     width: w * 0.415,

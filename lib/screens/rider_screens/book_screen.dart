@@ -6,7 +6,7 @@ import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_pic
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_details.dart';
-import 'package:mowasulatuna/widgets/rider_widgets/book_screen_widgets/book_box.dart';
+import 'package:mowasulatuna/widgets/book_box.dart';
 import 'package:provider/provider.dart';
 import '../../providers/book_provider.dart';
 
@@ -432,6 +432,8 @@ class BookScreen extends StatelessWidget {
                       right: w * 0.245,
                       child: GestureDetector(
                         onTap: () {
+                          pro.setCanCancelBook(0);
+
                           print(pro.locationValue);
                           print(pro.selectedTime);
                           print(pro.bookDay);

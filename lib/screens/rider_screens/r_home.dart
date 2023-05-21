@@ -144,8 +144,7 @@ class RHome extends StatelessWidget {
                       children: [
                         SizedBox(width: w * 0.01),
                         GestureDetector(
-                          onTap: () {
-                          },
+                          onTap: () {},
                           child: Container(
                             height: h * 0.055,
                             width: w * 0.17,
@@ -214,9 +213,7 @@ class RHome extends StatelessWidget {
                 top: h * 0.065,
                 right: w * 0.0583,
                 child: GestureDetector(
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                   child: Container(
                     height: h * 0.15,
                     width: w * 0.415,

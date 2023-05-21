@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/edit_profile_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
+import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -59,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           //MyBus() orrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr RHome()
-                          builder: (context) =>  MyBus(),
+                          builder: (context) => RHome(),
                         ),
                       );
                     },
@@ -247,7 +248,7 @@ class ProfileScreen extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  EditProfileScreen(),
+                                builder: (context) => EditProfileScreen(),
                               ),
                             );
                           },

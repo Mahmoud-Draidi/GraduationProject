@@ -2,6 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
+import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
+import 'package:mowasulatuna/screens/driver_screens/history.dart';
+import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -66,7 +69,13 @@ class MyDrawer extends StatelessWidget {
                         Container(
                           child: IconButton(
                             onPressed: () {
-
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  //MyBus() orrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr RHome()
+                                  builder: (context) => RHome(),
+                                ),
+                              );
                             },
                             icon: const Icon(
                               Icons.arrow_forward,

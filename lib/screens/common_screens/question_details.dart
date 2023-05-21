@@ -7,14 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
-import 'package:mowasulatuna/screens/rider_screens/history_details.dart';
+import 'package:mowasulatuna/screens/driver_screens/history_details.dart';
 import '../../providers/book_provider.dart';
-import 'r_home.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
-class HistoryScreen extends StatelessWidget {
-  const HistoryScreen({super.key});
-  
+class QuestionDetailsScreen extends StatelessWidget {
+  final int num;
+  final String question;
+  final String answer;
+
+  const QuestionDetailsScreen(this.num, this.question, this.answer,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,11 @@ class HistoryScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-
-    return Scaffold(
-      appBar: PreferredSize(
+    return Container(
+      height: h,
+      width: w,
+      child: Scaffold(
+        appBar: PreferredSize(
           preferredSize: Size.fromHeight(h * 0.10), // here the desired height
           child: AppBar(
             flexibleSpace: Container(
@@ -41,8 +46,7 @@ class HistoryScreen extends StatelessWidget {
                 ),
               ),
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            title: Column(
               children: [
                 Container(
                   margin: EdgeInsets.only(
@@ -52,39 +56,15 @@ class HistoryScreen extends StatelessWidget {
                   width: w * 0.38,
                   child: Image.asset('assets/images/logoText.png'),
                 ),
-                SizedBox(
-                  width: w*.05,
-                ),
-                Container(
-                  padding: EdgeInsets.only(right: w * 0.09),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  RHome(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xffdda006),
-                      size: 25,
-                    ),
-                  ),
-                ),
               ],
             ),
             centerTitle: true,
           ),
         ),
-      
-      body: Column(
-        children: [
-          
-          Container(
-          height: h*0.861,
+        body: Container(
+          height: h,
           width: w,
+          padding: EdgeInsets.all(25),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.png'),
@@ -96,52 +76,69 @@ class HistoryScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Stack(
-                  children: [GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  const HistoryDetails(),
-                        ),
-                      );
-                    },
-                    child: Container(
+                  children: [
+                    Container(
+                      height: h * 0.7,
                       margin: const EdgeInsets.only(top: 10, bottom: 5),
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/OneOfHistory.png'
-                          ),
-                        ),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/questionAndAnswer.png'),
+                          )
                       ),
-                    ),),
+                    ),
                     Positioned(
-                      top: h*0.43,
-                      right: w*0.15,
+                      top: h*0.03,
+                      right: w*0.63,
                       child: Text(
-                        pro.getDetailsDayDate(),
-                        textAlign: TextAlign.right,
+                        num.toString(),
+                        maxLines: 1, // Set the maximum number of lines
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.vazirmatn(
-                          color: const Color(0xb2f0f0f0),
-                          textStyle: const TextStyle(
-                            fontSize: 17,
+                          color: Color(0xffdda006),
+                          textStyle: TextStyle(
+                            fontSize: 25,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: h*0.43,
-                      right: w*0.59,
-                      child: Text(
-                        pro.getDetailsBookTime(),
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.vazirmatn(
-                          color: const Color(0xb2f0f0f0),
-                          textStyle: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
+                      top: h*0.09,
+                      right: w*0.07,
+                      child: Container(
+                        width: w*0.75,
+                        child: Text(
+                          question,
+                          maxLines: 2, // Set the maximum number of lines
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: GoogleFonts.vazirmatn(
+                            color: Color(0xb2f0f0f0),
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: h*0.22,
+                      right: w*0.2,
+                      child: Container(
+                        width: w*0.5,
+                        child: Text(
+                          answer,
+                          maxLines: 10, // Set the maximum number of lines
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: GoogleFonts.vazirmatn(
+                            color: Color(0xb2f0f0f0),
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
                       ),
@@ -152,9 +149,7 @@ class HistoryScreen extends StatelessWidget {
             ],
           ),
         ),
-        ],
       ),
-      
     );
   }
 }

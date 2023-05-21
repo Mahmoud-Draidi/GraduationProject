@@ -114,7 +114,7 @@ class DHome extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  "باصي",
+                                  "الباص",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.vazirmatn(
                                     color: Color(0xb2f0f0f0),
@@ -126,7 +126,7 @@ class DHome extends StatelessWidget {
                                 ),
                                 Center(
                                   child: Image.asset(
-                                    'assets/images/mingcute_steering-wheel-line.png',
+                                    'assets/images/Vector.png',
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -144,7 +144,8 @@ class DHome extends StatelessWidget {
                       children: [
                         SizedBox(width: w * 0.01),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                          },
                           child: Container(
                             height: h * 0.055,
                             width: w * 0.17,
@@ -155,7 +156,7 @@ class DHome extends StatelessWidget {
                             ),
                             child: Center(
                               child: Image.asset(
-                                'assets/images/people.png',
+                                'assets/images/mdi_bus-marker.png',
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -213,7 +214,10 @@ class DHome extends StatelessWidget {
                 top: h * 0.065,
                 right: w * 0.0583,
                 child: GestureDetector(
-                  onTap: () {},
+
+                  onTap: (){
+
+                  },
                   child: Container(
                     height: h * 0.15,
                     width: w * 0.415,

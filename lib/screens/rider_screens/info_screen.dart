@@ -51,7 +51,7 @@ class MyInfoScreen extends StatelessWidget {
         body: Container(
           height: h,
           width: w,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.png'),
               fit: BoxFit.cover,
@@ -64,24 +64,23 @@ class MyInfoScreen extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 5),
-                      padding: EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: BoxDecoration(
+
+                      margin: const EdgeInsets.only(top: 10, bottom: 5),
+                      padding: const EdgeInsets.only(top: 30, bottom: 30),
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/Group_5.png'
-                          ),
+                          image: AssetImage('assets/images/Group_5.png'),
                         ),
                       ),
                     ),
                     Positioned(
-                      top: h*0.095,
-                      right: w*0.23,
+                      top: h * 0.095,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsDayDate(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -90,13 +89,13 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.25,
-                      right: w*0.23,
+                      top: h * 0.25,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsLocation(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -105,13 +104,13 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.4,
-                      right: w*0.23,
+                      top: h * 0.4,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsBookTime(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -120,13 +119,13 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.55,
-                      right: w*0.23,
+                      top: h * 0.55,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsNumOfPersons(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -135,13 +134,13 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: h*0.705,
-                      right: w*0.23,
+                      top: h * 0.705,
+                      right: w * 0.23,
                       child: Text(
                         pro.getDetailsExpectedBusTime(),
                         textAlign: TextAlign.right,
                         style: GoogleFonts.vazirmatn(
-                          color: Color(0xb2f0f0f0),
+                          color: const Color(0xb2f0f0f0),
                           textStyle: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w700,
@@ -169,8 +168,8 @@ class MyInfoScreen extends StatelessWidget {
                               "طولكرم",
                               textAlign: TextAlign.center,
                               style: GoogleFonts.vazirmatn(
-                                color: Color(0xffdda006),
-                                textStyle: TextStyle(
+                                color: const Color(0xffdda006),
+                                textStyle: const TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -181,11 +180,11 @@ class MyInfoScreen extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>  MyInfoScreenTwo(),
-                              ),
-                            );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyInfoScreenTwo(),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -193,11 +192,11 @@ class MyInfoScreen extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>  MyInfoScreen(),
-                              ),
-                            );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyInfoScreen(),
+                          ),
+                        );
                       },
                       child: Container(
                         height: h * 0.086,
@@ -213,7 +212,7 @@ class MyInfoScreen extends StatelessWidget {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.vazirmatn(
                                 color: Colors.black,
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -230,7 +229,7 @@ class MyInfoScreen extends StatelessWidget {
           ),
         ),
         endDrawer: Drawer(
-          backgroundColor: Color(0x3f000000),
+          backgroundColor: const Color(0x3f000000),
           child: Container(),
         ),
       ),

@@ -9,12 +9,14 @@ class InputBox extends StatelessWidget {
   final TextInputType type;
   final bool isPassword;
   TextEditingController con;
+  // Function(String) onS=(String s){print('nulllll');};
   // final String errorText;
 
   InputBox(this.title, this.type, this.isPassword,this.con, {super.key});
 
   @override
   Widget build(BuildContext context) {
+
     final pro = Provider.of<InputBoxProvider>(context);
 
     double h = MediaQuery.of(context).size.height;
@@ -49,6 +51,7 @@ class InputBox extends StatelessWidget {
           ),
           Expanded(
             child: TextField(
+              // onSubmitted: onS!??(String s){print('nullllllllllll');},
               controller: con,
               textAlign: TextAlign.end,
               style: GoogleFonts.vazirmatn(

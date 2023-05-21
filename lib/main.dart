@@ -2,16 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/providers/book_provider.dart';
+import 'package:mowasulatuna/providers/controllers_provider.dart';
 import 'package:mowasulatuna/providers/input_box_provider.dart';
 import 'package:mowasulatuna/providers/seat_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/providers/sign_up_screen_provider.dart';
 import 'package:mowasulatuna/providers/sned_code_provider.dart';
+import 'package:mowasulatuna/providers/user_type_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/easy_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/logo_screen.dart';
+import 'package:mowasulatuna/screens/common_screens/my_google_map.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
-import 'package:mowasulatuna/screens/driver_screens/d_home.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_details.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
@@ -62,6 +64,8 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => SeatProvider()),
         ChangeNotifierProvider(create: (_) => BookProvider()),
         ChangeNotifierProvider(create: (_) => TimerProvider()),
+        ChangeNotifierProvider(create: (_) => ControllerProvider()),
+        ChangeNotifierProvider(create: (_) => UserTypeProvider()),
       ],
       child: const MyApp(),
     ),

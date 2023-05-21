@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
+import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import '../../providers/book_provider.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RHome extends StatelessWidget {
   @override
@@ -101,7 +103,14 @@ class RHome extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookScreen(),
+                              ),
+                            );
+                          },
                           child: Container(
                             height: h * 0.055,
                             width: w * 0.4,

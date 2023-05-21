@@ -12,8 +12,12 @@ import '../../providers/book_provider.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class QuestionDetailsScreen extends StatelessWidget {
-  const QuestionDetailsScreen({super.key});
-  
+  final int num;
+  final String question;
+  final String answer;
+
+  const QuestionDetailsScreen(this.num, this.question, this.answer,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +25,11 @@ class QuestionDetailsScreen extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-
-    return Scaffold(
-      appBar: PreferredSize(
+    return Container(
+      height: h,
+      width: w,
+      child: Scaffold(
+        appBar: PreferredSize(
           preferredSize: Size.fromHeight(h * 0.10), // here the desired height
           child: AppBar(
             flexibleSpace: Container(
@@ -55,12 +61,10 @@ class QuestionDetailsScreen extends StatelessWidget {
             centerTitle: true,
           ),
         ),
-      
-      body: Column(
-        children: [
-          Container(
-          height: h*0.861,
+        body: Container(
+          height: h,
           width: w,
+          padding: EdgeInsets.all(25),
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/images/background.png'),
@@ -72,30 +76,80 @@ class QuestionDetailsScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: Stack(
-                  children: [GestureDetector(
-                    onTap: (){},
-                    child: Container(
-                      height: h*.7,
+                  children: [
+                    Container(
+                      height: h * 0.7,
                       margin: const EdgeInsets.only(top: 10, bottom: 5),
                       padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/questionAndAnswer.png'
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/questionAndAnswer.png'),
+                          )
+                      ),
+                    ),
+                    Positioned(
+                      top: h*0.03,
+                      right: w*0.63,
+                      child: Text(
+                        num.toString(),
+                        maxLines: 1, // Set the maximum number of lines
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.vazirmatn(
+                          color: Color(0xffdda006),
+                          textStyle: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
-                    ),),
-                   
+                    ),
+                    Positioned(
+                      top: h*0.09,
+                      right: w*0.07,
+                      child: Container(
+                        width: w*0.75,
+                        child: Text(
+                          question,
+                          maxLines: 2, // Set the maximum number of lines
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: GoogleFonts.vazirmatn(
+                            color: Color(0xb2f0f0f0),
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: h*0.22,
+                      right: w*0.2,
+                      child: Container(
+                        width: w*0.5,
+                        child: Text(
+                          answer,
+                          maxLines: 10, // Set the maximum number of lines
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: GoogleFonts.vazirmatn(
+                            color: Color(0xb2f0f0f0),
+                            textStyle: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        ],
       ),
-      
     );
   }
 }

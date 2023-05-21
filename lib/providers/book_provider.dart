@@ -95,4 +95,14 @@ class BookProvider extends ChangeNotifier{
     else if(str == 'Friday') return 'الجمعة';
     else return 'السبت';
   }
+
+
+  int index = 0;
+  getIndex(){
+    return index;
+    notifyListeners();
+  }
+  setIndex(int n){
+    index = n;
+  }
 }

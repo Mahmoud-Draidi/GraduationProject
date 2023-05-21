@@ -273,7 +273,7 @@ class EditProfileScreen extends StatelessWidget {
                                           FirebaseAuth auth = FirebaseAuth.instance;
                                           await FirebaseFirestore.instance
                                               .collection('passengers').doc(auth.currentUser!.uid)
-                                              .set({
+                                              .update({
                                             'name':  pro.controllerName.text,
                                             'phone' : phoneNum,
                                             'email': pro.controllerEmail.text,
@@ -284,6 +284,36 @@ class EditProfileScreen extends StatelessWidget {
                                             print(
                                                 'Error adding user to Firestore: $error');
                                           });
+
+
+                                          User? user = FirebaseAuth.instance.currentUser;
+
+                                          if (user != null) {
+                                            String newEmail = pro.controllerEmail.text;
+                                            user.updateEmail(newEmail)
+                                                .then((_) {
+                                              // Email update successful
+                                              print("Email updated successfully");
+                                            })
+                                                .catchError((error) {
+                                              // Handle email update error
+                                              print("Failed to update email: $error");
+                                            });
+                                          }
+                                          if (user != null) {
+                                            String newPassword = pro.controllerPass.text;
+                                            user.updatePassword(newPassword)
+                                                .then((_) {
+                                              // Password update successful
+                                              print("Password updated successfully");
+                                            })
+                                                .catchError((error) {
+                                              // Handle password update error
+                                              print("Failed to update password: $error");
+                                            });
+                                          }
+
+
                                           Navigator.pushReplacement(
                                             context,
                                             MaterialPageRoute(

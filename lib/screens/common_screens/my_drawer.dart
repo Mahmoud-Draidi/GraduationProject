@@ -53,7 +53,15 @@ class MyDrawer extends StatelessWidget {
             return Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text("Loading");
+            return AlertDialog(
+              title: Text('loading' ),
+              content: Container(
+                height: 50,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            );
           }
 
           String uid = FirebaseAuth.instance.currentUser?.uid ?? '';

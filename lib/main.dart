@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/providers/book_provider.dart';
+import 'package:mowasulatuna/providers/controllers_provider.dart';
 import 'package:mowasulatuna/providers/input_box_provider.dart';
 import 'package:mowasulatuna/providers/seat_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
@@ -63,6 +64,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => SeatProvider()),
         ChangeNotifierProvider(create: (_) => BookProvider()),
         ChangeNotifierProvider(create: (_) => TimerProvider()),
+        ChangeNotifierProvider(create: (_) => ControllerProvider()),
       ],
       child: const MyApp(),
     ),
@@ -85,7 +87,7 @@ class MyApp extends StatelessWidget {
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => MyGoogleMap() : (context) => RHome(),
+        'home' : isSignedIn == false ? (context) => SignInScreen() : (context) => RHome(),
         'intro' : (context) => LogoScreen(),
       },
     );

@@ -271,7 +271,7 @@ class BookDetails extends StatelessWidget {
                           width: w * 0.1,
                         ),
                         Text(
-                          "إلغاء الحجز",
+                          "تم الحجز",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.vazirmatn(
                             color: Colors.black.withOpacity(0.4),
@@ -285,8 +285,8 @@ class BookDetails extends StatelessWidget {
                           width: w * 0.02,
                         ),
                         Icon(
-                          Icons.cancel_outlined,
-                          color: Colors.red.shade800.withOpacity(0.4),
+                          Icons.check,
+                          color: Colors.green.shade800.withOpacity(0.4),
                           size: 30,
                         ),
                       ],

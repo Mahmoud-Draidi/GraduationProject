@@ -2,9 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/providers/user_type_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/edit_profile_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
+import 'package:provider/provider.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -12,6 +14,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final proType = Provider.of<UserTypeProvider>(context);
 
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -39,10 +43,9 @@ class ProfileScreen extends StatelessWidget {
       }
     }
 
-    bool isDriver = false;
 
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
-        .collection(isDriver ? 'drivers' : 'passengers')
+        .collection(proType.isDriver ? 'drivers' : 'passengers')
         .snapshots();
 
     return StreamBuilder<QuerySnapshot>(
@@ -284,37 +287,37 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(height: h * 0.109),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EditProfileScreen(doubleName,phoneNum,userName,email,pass),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  height: h * 0.086,
-                                  color: const Color(0xffdda006),
-                                  child: Center(
-                                    child: Text(
-                                      "تعديل معلومات الحساب",
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.vazirmatn(
-                                        color: Colors.black,
-                                        textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w700,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            SizedBox(height: h * 0.21),
+                            // Align(
+                            //   alignment: Alignment.bottomCenter,
+                            //   child: GestureDetector(
+                            //     onTap: () {
+                            //       Navigator.pushReplacement(
+                            //         context,
+                            //         MaterialPageRoute(
+                            //           builder: (context) => EditProfileScreen(doubleName,phoneNum,userName,email,pass),
+                            //         ),
+                            //       );
+                            //     },
+                            //     child: Container(
+                            //       height: h * 0.086,
+                            //       color: const Color(0xffdda006),
+                            //       child: Center(
+                            //         child: Text(
+                            //           "تعديل معلومات الحساب",
+                            //           textAlign: TextAlign.center,
+                            //           style: GoogleFonts.vazirmatn(
+                            //             color: Colors.black,
+                            //             textStyle: const TextStyle(
+                            //               fontSize: 22,
+                            //               fontWeight: FontWeight.w700,
+                            //             ),
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

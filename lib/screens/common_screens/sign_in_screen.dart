@@ -15,8 +15,12 @@ import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:mowasulatuna/widgets/inputBox.dart';
 import 'package:provider/provider.dart';
 import '../../firebase_services/firestore_helper.dart';
+import '../../providers/user_type_provider.dart';
 
 class SignInScreen extends StatelessWidget {
+
+
+
   TextEditingController controllerPhone = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
 
@@ -24,6 +28,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final proType = Provider.of<UserTypeProvider>(context);
     final pro = Provider.of<SignInScreenProvider>(context);
 
     double h = MediaQuery.of(context).size.height;
@@ -81,30 +86,30 @@ class SignInScreen extends StatelessWidget {
                     ),
                     SizedBox(height: h * 0.04),
                     // MyInputBox('تجريب', TextInputType.emailAddress, false, controllerTest),
-                    Container(
-                      margin: EdgeInsets.only(right: w * 0.13),
-                      child: TextButton(
-                        onPressed: () {
-                          if (!pro.isForgetPassClicked) {
-                            pro.setIsForgetPassClicked();
-                            pro.incNumOfClicksOnForgetPass();
-                            Timer(const Duration(seconds: 3), () {
-                              pro.setIsForgetPassClicked();
-                            });
-                          }
-                        },
-                        child: Text(
-                          "هل نسيت كلمة المرور؟",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: pro.numOfClicksOnForgetPass <= 3
-                                ? Color(0xff70a8f1)
-                                : Color(0xff70a8f1).withOpacity(0.5),
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(right: w * 0.13),
+                    //   child: TextButton(
+                    //     onPressed: () {
+                    //       if (!pro.isForgetPassClicked) {
+                    //         pro.setIsForgetPassClicked();
+                    //         pro.incNumOfClicksOnForgetPass();
+                    //         Timer(const Duration(seconds: 3), () {
+                    //           pro.setIsForgetPassClicked();
+                    //         });
+                    //       }
+                    //     },
+                    //     child: Text(
+                    //       "هل نسيت كلمة المرور؟",
+                    //       textAlign: TextAlign.right,
+                    //       style: TextStyle(
+                    //         color: pro.numOfClicksOnForgetPass <= 3
+                    //             ? Color(0xff70a8f1)
+                    //             : Color(0xff70a8f1).withOpacity(0.5),
+                    //         fontSize: 14,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: pro.isForgetPassClicked &&
                               pro.numOfClicksOnForgetPass <= 3
@@ -183,12 +188,13 @@ class SignInScreen extends StatelessWidget {
                                   if (controllerPhone.text == user['phone'] &&
                                       controllerPass.text == user['password']) {
                                     print(
-                                        '0000000000000000000000000000000000000000000000');
+                                        '010101010010101001000101010100101010100');
                                     try {
                                       auth.signInWithEmailAndPassword(
                                         email: user['email'],
                                         password: controllerPass.text,
                                       );
+                                      proType.setIsDriverTrue();
 
                                       Navigator.pushReplacement(
                                         context,
@@ -239,6 +245,7 @@ class SignInScreen extends StatelessWidget {
                                         email: user['email'],
                                         password: controllerPass.text,
                                       );
+                                      proType.setIsDriverTrue();
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -259,12 +266,12 @@ class SignInScreen extends StatelessWidget {
                                       ).show();
                                       print('your password is wrong');
                                     } else {
-                                      AwesomeDialog(
-                                        context: context,
-                                        title: "Error",
-                                        body: Text('invalid phone number'),
-                                      ).show();
-                                      print('invalid phone number');
+                                      // AwesomeDialog(
+                                      //   context: context,
+                                      //   title: "Error",
+                                      //   body: Text('invalid phone number'),
+                                      // ).show();
+                                      // print('invalid phone number');
                                     }
 
                                     // credential.user.uid

@@ -9,6 +9,7 @@ import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/providers/sign_up_screen_provider.dart';
 import 'package:mowasulatuna/providers/sned_code_provider.dart';
+import 'package:mowasulatuna/providers/user_type_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/easy_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/logo_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/my_google_map.dart';
@@ -65,6 +66,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => BookProvider()),
         ChangeNotifierProvider(create: (_) => TimerProvider()),
         ChangeNotifierProvider(create: (_) => ControllerProvider()),
+        ChangeNotifierProvider(create: (_) => UserTypeProvider()),
       ],
       child: const MyApp(),
     ),

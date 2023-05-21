@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mowasulatuna/providers/user_type_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/help_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../rider_screens/history.dart';
 import '../rider_screens/r_home.dart';
@@ -17,6 +19,7 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final proType = Provider.of<UserTypeProvider>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -42,9 +45,8 @@ class MyDrawer extends StatelessWidget {
         return Icons.nights_stay;
       }
     }
-    bool isDriver = false;
 
-    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection(isDriver?'drivers':'passengers').snapshots();
+    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection(proType.isDriver?'drivers':'passengers').snapshots();
 
     return StreamBuilder<QuerySnapshot>(
         stream: _usersStream,

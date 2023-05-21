@@ -12,7 +12,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading = true;
 
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -52,9 +51,17 @@ class ProfileScreen extends StatelessWidget {
           if (snapshot.hasError) {
             return Text('Something went wrong');
           }
-          // if (snapshot.connectionState == ConnectionState.waiting) {
-          //   return Text("Loading");
-          // }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return AlertDialog(
+              title: Text('loading' ),
+              content: Container(
+                height: 50,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            );
+          }
 
           String uid = FirebaseAuth.instance.currentUser?.uid ?? '';
 
@@ -62,6 +69,7 @@ class ProfileScreen extends StatelessWidget {
           String userName = 'user name';
           String phoneNum = '+9725********';
           String email = "example@gmail.com";
+          String pass = '********';
           int rate = 5;
 
           QuerySnapshot querySnapshot = snapshot.data!;
@@ -71,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
               userName = document.get('name') ?? '';
               phoneNum = document.get('phone') ?? '';
               email = document.get('email') ?? '';
-              isLoading = false;
+              pass = document.get('password') ?? '';
               break;
             }
           }
@@ -112,9 +120,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.only(right: w * 0.13),
-                        child: isLoading
-                            ? CircularProgressIndicator()
-                            : Text(
+                        child: Text(
                                 doubleName,
                                 textAlign: TextAlign.right,
                                 style: GoogleFonts.vazirmatn(
@@ -188,9 +194,7 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              child: isLoading
-                                  ? CircularProgressIndicator()
-                                  : Text(
+                              child:  Text(
                                       "الاسم الرباعي\n $userName",
                                       textAlign: TextAlign.right,
                                       style: GoogleFonts.vazirmatn(
@@ -216,9 +220,7 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              child: isLoading
-                                  ? CircularProgressIndicator()
-                                  : Text(
+                              child: Text(
                                       "رقم الجوال\n $phoneNum",
                                       textAlign: TextAlign.right,
                                       style: GoogleFonts.vazirmatn(
@@ -244,9 +246,7 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              child: isLoading
-                                  ? CircularProgressIndicator()
-                                  : Text(
+                              child:Text(
                                       "البريد الالكتروني\n $email",
                                       textAlign: TextAlign.right,
                                       style: GoogleFonts.vazirmatn(
@@ -292,7 +292,7 @@ class ProfileScreen extends StatelessWidget {
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => EditProfileScreen(),
+                                      builder: (context) => EditProfileScreen(doubleName,phoneNum,userName,email,pass),
                                     ),
                                   );
                                 },

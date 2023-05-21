@@ -14,7 +14,6 @@ import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/sign_up_screen.dart';
 import 'package:mowasulatuna/widgets/inputBox.dart';
 import 'package:provider/provider.dart';
-
 import '../../firebase_services/firestore_helper.dart';
 
 class SignInScreen extends StatelessWidget {

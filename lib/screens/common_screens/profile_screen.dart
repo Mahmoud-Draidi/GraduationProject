@@ -6,6 +6,7 @@ import 'package:mowasulatuna/providers/user_type_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/edit_profile_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
+
 import 'package:provider/provider.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
@@ -42,7 +43,6 @@ class ProfileScreen extends StatelessWidget {
         return Icons.nights_stay;
       }
     }
-
 
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
         .collection(proType.isDriver ? 'drivers' : 'passengers')

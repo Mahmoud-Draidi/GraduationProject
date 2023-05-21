@@ -14,7 +14,6 @@ import 'package:mowasulatuna/screens/common_screens/easy_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/logo_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/my_google_map.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
-import 'package:mowasulatuna/screens/driver_screens/history_details.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_details.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
@@ -89,8 +88,10 @@ class MyApp extends StatelessWidget {
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => SignInScreen() : (context) => RHome(),
-        'intro' : (context) => LogoScreen(),
+        'home': isSignedIn == false
+            ? (context) => SignInScreen()
+            : (context) => RHome(),
+        'intro': (context) => LogoScreen(),
       },
     );
   }

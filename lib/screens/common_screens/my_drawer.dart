@@ -8,11 +8,8 @@ import 'package:mowasulatuna/providers/user_type_provider.dart';
 import 'package:mowasulatuna/screens/common_screens/help_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
-import 'package:provider/provider.dart';
-
-import '../rider_screens/history.dart';
-import '../rider_screens/r_home.dart';
-import 'question.dart';
+import 'package:mowasulatuna/screens/driver_screens/history.dart';
+import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -199,7 +196,15 @@ class MyDrawer extends StatelessWidget {
                             ),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  //MyBus() orrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr RHome()
+                                  builder: (context) => RHome(),
+                                ),
+                              );
+                            },
                             icon: const Icon(
                               Icons.person,
                               color: Color(0xffdda006),

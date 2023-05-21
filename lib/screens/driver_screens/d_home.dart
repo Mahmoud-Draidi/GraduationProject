@@ -214,6 +214,7 @@ class DHome extends StatelessWidget {
                 top: h * 0.065,
                 right: w * 0.0583,
                 child: GestureDetector(
+
                   onTap: (){
 
                   },

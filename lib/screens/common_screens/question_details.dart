@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/history_details.dart';
-import '../../providers/book_provider.dart';
+import '../../providers/book_provider_passenger.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class QuestionDetailsScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class QuestionDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<BookProvider>(context);
+    final pro = Provider.of<BookProviderPassenger>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 

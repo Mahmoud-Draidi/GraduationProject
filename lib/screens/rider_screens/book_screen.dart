@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,14 +10,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_datetime_picker/flutter_cupertino_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:mowasulatuna/providers/booking_process_provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_details.dart';
 import 'package:mowasulatuna/widgets/book_box.dart';
 import 'package:provider/provider.dart';
-import '../../providers/book_provider.dart';
+import '../../providers/book_provider_passenger.dart';
 
 class BookScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+
+    final pro = Provider.of<BookProviderPassenger>(context);
+    final proBook = Provider.of<BookingProcessProvider>(context);
+
     List<String> choices = [
       'طولكرم(الكراج)',
       'الحارة الشرقية',
@@ -27,18 +36,29 @@ class BookScreen extends StatelessWidget {
 
     List<String> nums = ['1', '2', '3', '4', '5', '6','7'];
 
-    List<String> dayTomorrowList;
-    DateTime now = DateTime.now();
-    if(DateFormat('EEEE').format(now)=='Friday'){
-      dayTomorrowList =['غداّّ'];
+    // DateTime now = DateTime.now();
+    // if(DateFormat('EEEE').format(now)=='Friday'){
+    //   dayTomorrowList =['غداّّ'];
+    // }
+    // else if(DateFormat('EEEE').format(now)=='Thursday'){
+    //   dayTomorrowList=['اليوم'];
+    // }
+    // else{
+    //   dayTomorrowList = ['اليوم','غداََ'];
+    // }
+
+
+    bool isPast(TimeOfDay givenTime) {
+      TimeOfDay currentTime = TimeOfDay.now();
+      return givenTime.hour < currentTime.hour ||
+          (givenTime.hour == currentTime.hour && givenTime.minute < currentTime.minute);
     }
-    else if(DateFormat('EEEE').format(now)=='Thursday'){
-      dayTomorrowList=['اليوم'];
+
+    bool isFuture(TimeOfDay givenTime) {
+      TimeOfDay currentTime = TimeOfDay.now();
+      return givenTime.hour > currentTime.hour ||
+          (givenTime.hour == currentTime.hour && givenTime.minute > currentTime.minute);
     }
-    else{
-      dayTomorrowList = ['اليوم','غداََ'];
-    }
-    final pro = Provider.of<BookProvider>(context);
 
     Future<String> selectTime(BuildContext context) async {
       final Completer<String> completer = Completer<String>();
@@ -74,6 +94,8 @@ class BookScreen extends StatelessWidget {
         completer.complete('');
       }
 
+      proBook.setSelectedTomeOfDay(pickedTime!);
+
       return completer.future;
     }
 
@@ -81,6 +103,8 @@ class BookScreen extends StatelessWidget {
       final String time = await selectTime(context);
       pro.setSelectedTime(time);
     }
+
+
 
 
     double h = MediaQuery.of(context).size.height;
@@ -110,13 +134,18 @@ class BookScreen extends StatelessWidget {
             ),
             title: Column(
               children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    top: h * 0.015,
+                GestureDetector(
+                  onTap: (){
+                    print('csacsa');
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      top: h * 0.015,
+                    ),
+                    height: h * 0.053,
+                    width: w * 0.38,
+                    child: Image.asset('assets/images/logoText.png'),
                   ),
-                  height: h * 0.053,
-                  width: w * 0.38,
-                  child: Image.asset('assets/images/logoText.png'),
                 ),
               ],
             ),
@@ -247,72 +276,72 @@ class BookScreen extends StatelessWidget {
                           color: Color(0xFF353535),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            GestureDetector(
-                              child: Container(
-                                width: w * 0.25,
-                                child: PopupMenuButton<String>(
-                                  color: Color(0xFF353535),
-                                  offset: Offset(0, 28),
-                                  // Adjust the vertical offset as needed
-                                  child: Container(
-                                    height: 28,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Color(0xFF353535),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 8,top:5),
-                                          child: Text(
-                                            pro.bookDay ?? '',
-                                            textAlign: TextAlign.right,
-                                            style: GoogleFonts.vazirmatn(
-                                              color: const Color(0xfff0f0f0),
-                                              textStyle: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_drop_down,
-                                          size: 32,
-                                          color: Color(0xffdda006),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  itemBuilder: (BuildContext context) =>
-                                      dayTomorrowList.map((String value) {
-                                        return PopupMenuItem<String>(
-                                          value: value,
-                                          child: Align(
-                                            alignment: Alignment.centerRight,
-                                            child: Text(
-                                              value,
-                                              textAlign: TextAlign.right,
-                                              style: GoogleFonts.vazirmatn(
-                                                color: Color(0xfff0f0f0),
-                                                textStyle: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }).toList(),
-                                  onSelected: (String? val) {
-                                    pro.setBookDay(val!);
-                                  },
-                                ),
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   child: Container(
+                            //     width: w * 0.25,
+                            //     child: PopupMenuButton<String>(
+                            //       color: Color(0xFF353535),
+                            //       offset: Offset(0, 28),
+                            //       // Adjust the vertical offset as needed
+                            //       child: Container(
+                            //         height: 28,
+                            //         decoration: BoxDecoration(
+                            //           borderRadius: BorderRadius.circular(15),
+                            //           color: Color(0xFF353535),
+                            //         ),
+                            //         child: Row(
+                            //           mainAxisAlignment: MainAxisAlignment.end,
+                            //           children: [
+                            //             Padding(
+                            //               padding: const EdgeInsets.only(left: 8,top:5),
+                            //               child: Text(
+                            //                 pro.bookDay ?? '',
+                            //                 textAlign: TextAlign.right,
+                            //                 style: GoogleFonts.vazirmatn(
+                            //                   color: const Color(0xfff0f0f0),
+                            //                   textStyle: const TextStyle(
+                            //                     fontSize: 18,
+                            //                     fontWeight: FontWeight.w500,
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //             Icon(
+                            //               Icons.arrow_drop_down,
+                            //               size: 32,
+                            //               color: Color(0xffdda006),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //       itemBuilder: (BuildContext context) =>
+                            //           dayTomorrowList.map((String value) {
+                            //             return PopupMenuItem<String>(
+                            //               value: value,
+                            //               child: Align(
+                            //                 alignment: Alignment.centerRight,
+                            //                 child: Text(
+                            //                   value,
+                            //                   textAlign: TextAlign.right,
+                            //                   style: GoogleFonts.vazirmatn(
+                            //                     color: Color(0xfff0f0f0),
+                            //                     textStyle: TextStyle(
+                            //                       fontSize: 18,
+                            //                       fontWeight: FontWeight.w700,
+                            //                     ),
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //             );
+                            //           }).toList(),
+                            //       onSelected: (String? val) {
+                            //         pro.setBookDay(val!);
+                            //       },
+                            //     ),
+                            //   ),
+                            // ),
 
                             GestureDetector(
                               onTap: (){
@@ -434,20 +463,52 @@ class BookScreen extends StatelessWidget {
                       right: w * 0.245,
                       child: GestureDetector(
                         onTap: () async{
-                          pro.setCanCancelBook(0);
-
                           print(pro.locationValue);
                           print(pro.selectedTime);
                           print(pro.bookDay);
                           print(pro.numOfPersons);
 
 
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BookDetails(),
-                            ),
-                          );
+                          DateTime now = DateTime.now();
+                          if(proBook.bookState==2||proBook.bookState==3){
+                            AwesomeDialog(
+                              context: context,
+                              title: "Error",
+                              body: Text('لايمكنك الحجز، انت حاجز بالفعل'),
+                            ).show();
+                          }
+                          else if(proBook.bookState==1){
+                            AwesomeDialog(
+                              context: context,
+                              title: "Error",
+                              body: Text('فم بالغاء الحجز السابق اولا'),
+                            ).show();
+                          }
+                          else if(DateFormat('EEEE').format(now)=='Friday'){
+                            AwesomeDialog(
+                              context: context,
+                              title: "Error",
+                              body: Text('لا يوجد مواصلات يوم الجمعة'),
+                            ).show();
+                          }
+                          else if(isPast(proBook.selectedTimeOfDay!)){
+                            AwesomeDialog(
+                              context: context,
+                              title: "Error",
+                              body: Text('اختر وقتا صحيحا'),
+                            ).show();
+                          }
+                          else {
+                            pro.setCanCancelBook(0);
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookDetails(),
+                              ),
+                            );
+                          }
+
+
                         },
                         child: Container(
                           height: h * 0.055,

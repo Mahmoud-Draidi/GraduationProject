@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/history_details.dart';
-import '../../providers/book_provider.dart';
+import '../../providers/book_provider_passenger.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class HelpScreen extends StatelessWidget {
@@ -17,7 +17,7 @@ class HelpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<BookProvider>(context);
+    final pro = Provider.of<BookProviderPassenger>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -56,67 +56,63 @@ class HelpScreen extends StatelessWidget {
           ),
         ),
       
-      body: Column(
+      body: Container(
+      height: h*0.86,
+      width: w,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-          height: h*0.86,
-          width: w,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/background.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [GestureDetector(
-                    onTap: (){},
-                    child: Container(
-                      height: h*.7,
-                      margin: const EdgeInsets.only(top: 10, bottom: 5),
-                      padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/inputProblem.png'
-                          ),
-                        ),
-                      ),
-                    ),),
-                    Positioned(
-                      top: h*.775,
-                      width: w,
-                      child: GestureDetector(
-                        child: Container(
-                          height: h * 0.086,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/sendButton.png'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        onTap: () {
-                          // Navigator.pushReplacement(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) =>  MyInfoScreenTwo(),
-                          //       ),
-                          //     );
-                        },
+          Expanded(
+            child: Stack(
+              children: [GestureDetector(
+                onTap: (){},
+                child: Container(
+                  height: h*.7,
+                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  padding: const EdgeInsets.only(top: 30, bottom: 30),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                          'assets/images/inputProblem.png'
                       ),
                     ),
-                  ],
+                  ),
+                ),),
+                Positioned(
+                  top: h*.775,
+                  width: w,
+                  child: GestureDetector(
+                    child: Container(
+                      height: h * 0.086,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/sendButton.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      // Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) =>  MyInfoScreenTwo(),
+                      //       ),
+                      //     );
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
         ],
       ),
+        ),
       
     );
   }

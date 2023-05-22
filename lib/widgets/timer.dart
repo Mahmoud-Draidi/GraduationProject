@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mowasulatuna/providers/book_provider.dart';
+import 'package:mowasulatuna/providers/book_provider_passenger.dart';
 import 'package:mowasulatuna/providers/timer_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +13,7 @@ class MyTimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<TimerProvider>(context);
-    final pro2 = Provider.of<BookProvider>(context);
+    final pro2 = Provider.of<BookProviderPassenger>(context);
 
     return Container(
       margin: EdgeInsets.only(top: 3),

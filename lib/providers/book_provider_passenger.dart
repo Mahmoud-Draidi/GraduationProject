@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class BookProvider extends ChangeNotifier{
-  bool isBooked = false;
+class BookProviderPassenger extends ChangeNotifier{
+
+
   bool isOrangeCase = false;
   String locationValue='الدوار';
   String selectedTime = '12:00';
@@ -71,10 +72,10 @@ class BookProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  setIsBooked(){
-    isBooked = !isBooked;
-    notifyListeners();
-  }
+  // setIsBooked(){
+  //   isBooked = !isBooked;
+  //   notifyListeners();
+  // }
 
   setIsOrangeCase(){
     isOrangeCase = !isOrangeCase;

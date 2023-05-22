@@ -1,5 +1,6 @@
 
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -219,7 +220,7 @@ class MyDrawer extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const HistoryScreen(),
@@ -315,12 +316,11 @@ class MyDrawer extends StatelessWidget {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HelpScreen(),
-                              ),
-                            );
+                            AwesomeDialog(
+                              context: context,
+                              title: "Error",
+                              body: Text('هذه الخدمة قيد التطوير'),
+                            ).show();
                           },
                           child: Text(
                             "طلب المساعدة",

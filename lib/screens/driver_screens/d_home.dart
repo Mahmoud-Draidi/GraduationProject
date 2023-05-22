@@ -5,12 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
-import '../../providers/book_provider.dart';
+import '../../providers/book_provider_passenger.dart';
 
 class DHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<BookProvider>(context);
+    final pro = Provider.of<BookProviderPassenger>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Container(
@@ -189,64 +189,6 @@ class DHome extends StatelessWidget {
                 ),
               ),
             ),
-            if (pro.isBooked)
-              Positioned(
-                top: h * 0.065,
-                right: w * 0.0583,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    height: h * 0.15,
-                    width: w * 0.415,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/Group_3.png',
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            if (pro.isOrangeCase)
-              Positioned(
-                top: h * 0.065,
-                right: w * 0.0583,
-                child: GestureDetector(
-                  onTap: (){
-
-                  },
-                  child: Container(
-                    height: h * 0.15,
-                    width: w * 0.415,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/images/Group_4.png',
-                        ),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            if (pro.isOrangeCase)
-              Positioned(
-                right: w * 0.25,
-                top: h * 0.093,
-                child: Text(
-                  "10:50",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.vazirmatn(
-                    color: Colors.black,
-                    textStyle: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
           ],
         ),
         endDrawer: MyDrawer(),

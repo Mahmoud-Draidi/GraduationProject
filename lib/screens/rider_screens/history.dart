@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
 import 'package:mowasulatuna/screens/rider_screens/history_details.dart';
-import '../../providers/book_provider.dart';
+import '../../providers/book_provider_passenger.dart';
 import 'r_home.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
@@ -18,7 +18,7 @@ class HistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<BookProvider>(context);
+    final pro = Provider.of<BookProviderPassenger>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
@@ -79,81 +79,76 @@ class HistoryScreen extends StatelessWidget {
           ),
         ),
       
-      body: Column(
+      body: Container(
+      height: h,
+      width: w,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/background.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          
-          Container(
-          height: h*0.861,
-          width: w,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/background.png'),
-              fit: BoxFit.cover,
+          Expanded(
+            child: Stack(
+              children: [GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  const HistoryDetails(),
+                    ),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 10, bottom: 5),
+                  padding: const EdgeInsets.only(top: 30, bottom: 30),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                          'assets/images/OneOfHistory.png'
+                      ),
+                    ),
+                  ),
+                ),),
+                Positioned(
+                  top: h*0.43,
+                  right: w*0.15,
+                  child: Text(
+                    pro.getDetailsDayDate(),
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.vazirmatn(
+                      color: const Color(0xb2f0f0f0),
+                      textStyle: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: h*0.43,
+                  right: w*0.59,
+                  child: Text(
+                    pro.getDetailsBookTime(),
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.vazirmatn(
+                      color: const Color(0xb2f0f0f0),
+                      textStyle: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Stack(
-                  children: [GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>  const HistoryDetails(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10, bottom: 5),
-                      padding: const EdgeInsets.only(top: 30, bottom: 30),
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/OneOfHistory.png'
-                          ),
-                        ),
-                      ),
-                    ),),
-                    Positioned(
-                      top: h*0.43,
-                      right: w*0.15,
-                      child: Text(
-                        pro.getDetailsDayDate(),
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.vazirmatn(
-                          color: const Color(0xb2f0f0f0),
-                          textStyle: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: h*0.43,
-                      right: w*0.59,
-                      child: Text(
-                        pro.getDetailsBookTime(),
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.vazirmatn(
-                          color: const Color(0xb2f0f0f0),
-                          textStyle: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
         ],
       ),
+        ),
       
     );
   }

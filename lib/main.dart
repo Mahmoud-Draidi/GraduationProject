@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mowasulatuna/providers/book_provider.dart';
 import 'package:mowasulatuna/providers/controllers_provider.dart';
+import 'package:mowasulatuna/providers/current_possition.dart';
 import 'package:mowasulatuna/providers/input_box_provider.dart';
 import 'package:mowasulatuna/providers/seat_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
@@ -67,6 +68,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => TimerProvider()),
         ChangeNotifierProvider(create: (_) => ControllerProvider()),
         ChangeNotifierProvider(create: (_) => UserTypeProvider()),
+        ChangeNotifierProvider(create: (_) => CurrentPossition()),
       ],
       child: const MyApp(),
     ),
@@ -80,6 +82,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
+
     return MaterialApp(
       title: 'مواصلاتنا',
       theme: ThemeData(
@@ -89,8 +93,10 @@ class MyApp extends StatelessWidget {
       initialRoute: initScreen == 0 || initScreen == null ? 'intro' : 'home',
       routes: {
         // Mustttttttttttttttttttttttt if driver or rider RHome() Or MyBus()
-        'home' : isSignedIn == false ? (context) => SignInScreen() : (context) => RHome(),
-        'intro' : (context) => LogoScreen(),
+        'home': isSignedIn == false
+            ? (context) => SignInScreen()
+            : (context) => RHome(proCurrentPosition.getkGooglePlex()),
+        'intro': (context) => LogoScreen(),
       },
     );
   }

@@ -18,6 +18,7 @@ import 'package:mowasulatuna/widgets/inputBox.dart';
 import 'package:mowasulatuna/widgets/timer.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/current_possition.dart';
 import '../../providers/sign_up_screen_provider.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -29,6 +30,8 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
+
     validate() {
       if (SignUpScreenFunctions.validateNameBoolean(controllerName.text) ==
           false) {
@@ -84,7 +87,7 @@ class SignUpScreen extends StatelessWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('please wiat! fffffffffffffffffff' ),
+                title: Text('please wiat! fffffffffffffffffff'),
                 content: Container(
                   height: 50,
                   child: Center(
@@ -94,8 +97,7 @@ class SignUpScreen extends StatelessWidget {
               );
             });
         // adding
-        final credential =
-           await auth.createUserWithEmailAndPassword(
+        final credential = await auth.createUserWithEmailAndPassword(
           email: controllerEmail.text,
           password: controllerPass.text,
         );
@@ -255,10 +257,12 @@ class SignUpScreen extends StatelessWidget {
                             .then((QuerySnapshot querySnapshot) async {
                           bool isPhoneExist = false; // Initialize the flag
                           querySnapshot.docs.forEach((doc) {
-                            print('qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
+                            print(
+                                'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq');
                             print(doc["phone"]);
                             if (doc['phone'] == controllerPhone.text) {
-                              isPhoneExist = true; // Set the flag if phone number exists
+                              isPhoneExist =
+                                  true; // Set the flag if phone number exists
                               AwesomeDialog(
                                 context: context,
                                 title: "Error",
@@ -275,7 +279,8 @@ class SignUpScreen extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('please wait!...phone not exsits'),
+                                    title:
+                                        Text('please wait!...phone not exsits'),
                                     content: Container(
                                       height: 50,
                                       child: Center(
@@ -291,27 +296,34 @@ class SignUpScreen extends StatelessWidget {
                             if (!isPhoneExist) {
                               await FirebaseAuth.instance.verifyPhoneNumber(
                                 phoneNumber: controllerPhone.text,
-                                verificationCompleted: (PhoneAuthCredential credential) async {
-                                  print('111111111111111111111111111111111111111111');
+                                verificationCompleted:
+                                    (PhoneAuthCredential credential) async {
+                                  print(
+                                      '111111111111111111111111111111111111111111');
                                   UserCredential? response = await signUp();
                                   if (response != null) {
                                     // Passenger p = Passenger(name: controllerName.text,);
                                     await FirebaseFirestore.instance
-                                        .collection('passengers').doc(response.user!.uid)
+                                        .collection('passengers')
+                                        .doc(response.user!.uid)
                                         .set({
                                       'name': controllerName.text,
                                       'phone': controllerPhone.text,
                                       'email': controllerEmail.text,
                                       'password': controllerPass.text,
                                     }).then((_) {
-                                      print('User added to Firestore successfully');
+                                      print(
+                                          'User added to Firestore successfully');
                                     }).catchError((error) {
-                                      print('Error adding user to Firestore: $error');
+                                      print(
+                                          'Error adding user to Firestore: $error');
                                     });
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => RHome(),
+                                        builder: (context) => RHome(
+                                            proCurrentPosition
+                                                .getkGooglePlex()),
                                       ),
                                     );
                                   }
@@ -328,8 +340,10 @@ class SignUpScreen extends StatelessWidget {
                                   print(e.code);
                                   // pro.setShowDialogFalse();
                                 },
-                                codeSent: (String verificationId, int? resendToken) {
-                                  print('333333333333333333333333333333333333333');
+                                codeSent:
+                                    (String verificationId, int? resendToken) {
+                                  print(
+                                      '333333333333333333333333333333333333333');
                                   pro.setShowDialogFalse();
                                   Navigator.pushReplacement(
                                     context,
@@ -343,7 +357,8 @@ class SignUpScreen extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                codeAutoRetrievalTimeout: (String verificationId) {},
+                                codeAutoRetrievalTimeout:
+                                    (String verificationId) {},
                                 timeout: const Duration(seconds: 60),
                               );
                             }
@@ -450,7 +465,6 @@ class SignUpScreen extends StatelessWidget {
                         //   );
                         // }
 
-
                         print(
                             'name : ${controllerName.text} ____ phone : ${controllerPhone.text}___ email : ${controllerEmail.text}____ password : ${controllerPass.text}____ repeatPass : ${controllerRepeatPass.text}');
                         print(
@@ -463,7 +477,6 @@ class SignUpScreen extends StatelessWidget {
                             'Name :${SignUpScreenFunctions.validatePassBoolean(controllerPass.text)}____${SignUpScreenFunctions.validatePassString(controllerPass.text)}');
                         print(
                             'Name :${SignUpScreenFunctions.validateRepeatePassBoolean(controllerPass.text, controllerRepeatPass.text)}____${SignUpScreenFunctions.validateRepeatePassString(controllerPass.text, controllerRepeatPass.text)}');
-
                       },
                       child: Container(
                         height: h * 0.086,

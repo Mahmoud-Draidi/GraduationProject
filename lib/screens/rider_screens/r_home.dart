@@ -1,17 +1,46 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+
 import 'package:mowasulatuna/screens/common_screens/my_drawer.dart';
 import 'package:mowasulatuna/screens/rider_screens/book_screen.dart';
-import 'package:provider/provider.dart';
 import 'package:mowasulatuna/screens/rider_screens/info_screen.dart';
+
 import '../../providers/book_provider.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../providers/current_possition.dart';
+
+GoogleMapController? newGoogleMapController;
+final Completer<GoogleMapController> _controllerGoogleMap = Completer();
 
 class RHome extends StatelessWidget {
+  CameraPosition? kGooglePlex;
+
+  RHome(this.kGooglePlex, {super.key});
+  // late GoogleMapController mapController;
+  // final LatLng _center = const LatLng(45.521563, -122.677433);
+
   @override
   Widget build(BuildContext context) {
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
+
+    // Future<CameraPosition> getLatAndLong() async {
+    //   cl = await Geolocator.getCurrentPosition().then((value) => value);
+    //   lat = cl?.latitude;
+    //   long = cl?.longitude;
+    //   return kGooglePlex = CameraPosition(
+    //     target: LatLng(lat, long),
+    //     zoom: 11.0,
+    //   );
+    // }
+
+    // proCurrentPosition.setkGooglePlex(getLatAndLong());
     final pro = Provider.of<BookProvider>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -53,17 +82,195 @@ class RHome extends StatelessWidget {
         ),
         body: Stack(
           children: [
-            Container(
-              height: h,
-              width: w,
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/background.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: SingleChildScrollView(
+            proCurrentPosition.getkGooglePlex() == null
+                ? CircularProgressIndicator()
+                : Container(
+                    child: GoogleMap(
+                      // onMapCreated: _onMapCreated,
+                      initialCameraPosition:
+                          proCurrentPosition.getkGooglePlex(),
+                      onMapCreated: (GoogleMapController controller) {
+                        _controllerGoogleMap.complete(controller);
+                        newGoogleMapController = controller;
+                        newGoogleMapController!.setMapStyle('''
+                      [
+                        {
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "color": "#242f3e"
+                            }
+                          ]
+                        },
+                        {
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#746855"
+                            }
+                          ]
+                        },
+                        {
+                          "elementType": "labels.text.stroke",
+                          "stylers": [
+                            {
+                              "color": "#242f3e"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "administrative.locality",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#d59563"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "poi",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#d59563"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "poi.park",
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "color": "#263c3f"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "poi.park",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#6b9a76"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road",
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "color": "#38414e"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road",
+                          "elementType": "geometry.stroke",
+                          "stylers": [
+                            {
+                              "color": "#212a37"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#9ca5b3"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road.highway",
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "color": "#746855"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road.highway",
+                          "elementType": "geometry.stroke",
+                          "stylers": [
+                            {
+                              "color": "#1f2835"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "road.highway",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#f3d19c"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "transit",
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "color": "#2f3948"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "transit.station",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#d59563"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "water",
+                          "elementType": "geometry",
+                          "stylers": [
+                            {
+                              "color": "#17263c"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "water",
+                          "elementType": "labels.text.fill",
+                          "stylers": [
+                            {
+                              "color": "#515c6d"
+                            }
+                          ]
+                        },
+                        {
+                          "featureType": "water",
+                          "elementType": "labels.text.stroke",
+                          "stylers": [
+                            {
+                              "color": "#17263c"
+                            }
+                          ]
+                        }
+                      ]
+                  ''');
+                      },
+                    ),
+                  ),
+            Positioned(
+              top: 0,
+              child: Container(
+                height: h,
+                width: w,
+                padding: EdgeInsets.all(20),
+                // decoration: BoxDecoration(
+
+                //   image: DecorationImage(
+                //     image: AssetImage('assets/images/background.png'),
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
                 child: Column(
                   children: [
                     Row(
@@ -153,8 +360,7 @@ class RHome extends StatelessWidget {
                       children: [
                         SizedBox(width: w * 0.01),
                         GestureDetector(
-                          onTap: () {
-                          },
+                          onTap: () {},
                           child: Container(
                             height: h * 0.055,
                             width: w * 0.17,
@@ -223,9 +429,7 @@ class RHome extends StatelessWidget {
                 top: h * 0.065,
                 right: w * 0.0583,
                 child: GestureDetector(
-                  onTap: (){
-
-                  },
+                  onTap: () {},
                   child: Container(
                     height: h * 0.15,
                     width: w * 0.415,

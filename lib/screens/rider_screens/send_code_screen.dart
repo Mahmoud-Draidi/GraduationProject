@@ -19,6 +19,7 @@ import 'package:mowasulatuna/widgets/timer2.dart';
 import 'package:provider/provider.dart';
 
 import '../../firebase_services/firestore_helper.dart';
+import '../../providers/current_possition.dart';
 
 class SendCodeScreen extends StatelessWidget {
   TextEditingController controllerCode = TextEditingController();
@@ -38,6 +39,7 @@ class SendCodeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
 
     signUp() async {
       FirebaseAuth auth = FirebaseAuth.instance;
@@ -295,7 +297,8 @@ class SendCodeScreen extends StatelessWidget {
                               if (response != null) {
                                 // Passenger p = Passenger(name: controllerName.text,);
                                 await FirebaseFirestore.instance
-                                    .collection('passengers').doc(response.user!.uid)
+                                    .collection('passengers')
+                                    .doc(response.user!.uid)
                                     .set({
                                   'name': name,
                                   'phone': phone,
@@ -310,7 +313,8 @@ class SendCodeScreen extends StatelessWidget {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => RHome(),
+                                    builder: (context) => RHome(
+                                        proCurrentPosition.getkGooglePlex()),
                                   ),
                                 );
                               }

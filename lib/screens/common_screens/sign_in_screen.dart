@@ -4,10 +4,14 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mowasulatuna/firebase_services/firestore_helper_driver.dart';
+import 'package:mowasulatuna/providers/current_possition.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
 import 'package:mowasulatuna/providers/sign_in_screen_provider.dart';
+import 'package:mowasulatuna/screens/common_screens/logo_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:mowasulatuna/screens/rider_screens/send_code_screen.dart';
@@ -18,21 +22,87 @@ import '../../firebase_services/firestore_helper.dart';
 import '../../providers/user_type_provider.dart';
 
 class SignInScreen extends StatelessWidget {
-
-
-
   TextEditingController controllerPhone = TextEditingController();
   TextEditingController controllerPass = TextEditingController();
 
   // TextEditingController controllerTest = TextEditingController();
+  Position? cl;
+  var lat;
+  var long;
+  Future<CameraPosition>? kGooglePlex;
 
   @override
   Widget build(BuildContext context) {
     final proType = Provider.of<UserTypeProvider>(context);
     final pro = Provider.of<SignInScreenProvider>(context);
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
 
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    Future<void> _determinePosition() async {
+      bool serviceEnabled;
+      LocationPermission permission;
+
+      // Test if location services are enabled.
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        // Location services are not enabled don't continue
+        // accessing the position and request users of the
+        // App to enable the location services.
+        return Future.error('Location services are disabled.');
+      }
+
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          // Permissions are denied, next time you could try
+          // requesting permissions again (this is also where
+          // Android's shouldShowRequestPermissionRationale
+          // returned true. According to Android guidelines
+          // your App should show an explanatory UI now.
+          return Future.error('Location permissions are denied');
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LogoScreen(),
+          ),
+        );
+
+        // Permissions are denied forever, handle appropriately.
+        return Future.error(
+            'Location permissions are permanently denied, we cannot request permissions.');
+      }
+
+      // When we reach here, permissions are granted and we can
+      // continue accessing the position of the device.
+      // return await Geolocator.getCurrentPosition();
+    }
+
+    // proCurrentPosition.setkGooglePlex(_determinePosition().);
+
+    _determinePosition();
+
+    Future<CameraPosition> getLatAndLong() async {
+      cl = await Geolocator.getCurrentPosition().then((value) => value);
+      lat = cl?.latitude;
+      long = cl?.longitude;
+      return CameraPosition(
+        target: LatLng(lat, long),
+        zoom: 11.0,
+      );
+    }
+
+    if (getLatAndLong() == null) {
+      print('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz');
+    }
+    kGooglePlex = getLatAndLong();
+    proCurrentPosition.setkGooglePlex(getLatAndLong());
+
     return Scaffold(
       body: Column(
         children: [
@@ -173,6 +243,57 @@ class SignInScreen extends StatelessWidget {
                         Expanded(
                           child: GestureDetector(
                             onTap: () async {
+                              // Future<void> _determinePosition() async {
+                              //   bool serviceEnabled;
+                              //   LocationPermission permission;
+
+                              //   // Test if location services are enabled.
+                              //   serviceEnabled =
+                              //       await Geolocator.isLocationServiceEnabled();
+                              //   if (!serviceEnabled) {
+                              //     // Location services are not enabled don't continue
+                              //     // accessing the position and request users of the
+                              //     // App to enable the location services.
+                              //     return Future.error(
+                              //         'Location services are disabled.');
+                              //   }
+
+                              //   permission = await Geolocator.checkPermission();
+                              //   if (permission == LocationPermission.denied) {
+                              //     permission =
+                              //         await Geolocator.requestPermission();
+                              //     if (permission == LocationPermission.denied) {
+                              //       // Permissions are denied, next time you could try
+                              //       // requesting permissions again (this is also where
+                              //       // Android's shouldShowRequestPermissionRationale
+                              //       // returned true. According to Android guidelines
+                              //       // your App should show an explanatory UI now.
+                              //       return Future.error(
+                              //           'Location permissions are denied');
+                              //     }
+                              //   }
+
+                              //   if (permission ==
+                              //       LocationPermission.deniedForever) {
+                              //     Navigator.pushReplacement(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //         builder: (context) => LogoScreen(),
+                              //       ),
+                              //     );
+
+                              //     // Permissions are denied forever, handle appropriately.
+                              //     return Future.error(
+                              //         'Location permissions are permanently denied, we cannot request permissions.');
+                              //   }
+
+                              //   // When we reach here, permissions are granted and we can
+                              //   // continue accessing the position of the device.
+                              //   // return await Geolocator.getCurrentPosition();
+                              // }
+
+                              // _determinePosition();
+
                               final auth = await FirebaseAuth.instance;
                               FirestoreHelperDriver firestoreHelperDriver =
                                   FirestoreHelperDriver();
@@ -246,10 +367,15 @@ class SignInScreen extends StatelessWidget {
                                         password: controllerPass.text,
                                       );
                                       proType.setIsDriverTrue();
+
+                                      // _determinePosition();
+
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => RHome(),
+                                          builder: (context) => RHome(
+                                              proCurrentPosition
+                                                  .getkGooglePlex()),
                                         ),
                                       );
                                       print(

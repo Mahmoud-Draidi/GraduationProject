@@ -7,6 +7,8 @@ import 'package:mowasulatuna/screens/common_screens/edit_profile_screen.dart';
 import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 import 'package:mowasulatuna/screens/rider_screens/r_home.dart';
 import 'package:provider/provider.dart';
+
+import '../../providers/current_possition.dart';
 //import 'package:mowasulatuna/screens/driver_screens/my_bus.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,8 +16,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final proType = Provider.of<UserTypeProvider>(context);
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
 
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
@@ -43,7 +45,6 @@ class ProfileScreen extends StatelessWidget {
       }
     }
 
-
     final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
         .collection(proType.isDriver ? 'drivers' : 'passengers')
         .snapshots();
@@ -56,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return AlertDialog(
-              title: Text('loading' ),
+              title: Text('loading'),
               content: Container(
                 height: 50,
                 child: Center(
@@ -107,7 +108,8 @@ class ProfileScreen extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => RHome(),
+                                builder: (context) =>
+                                    RHome(proCurrentPosition.getkGooglePlex()),
                               ),
                             );
                           },
@@ -124,16 +126,16 @@ class ProfileScreen extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.only(right: w * 0.13),
                         child: Text(
-                                doubleName,
-                                textAlign: TextAlign.right,
-                                style: GoogleFonts.vazirmatn(
-                                  color: const Color(0xfff0f0f0),
-                                  textStyle: const TextStyle(
-                                    fontSize: 36,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
+                          doubleName,
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.vazirmatn(
+                            color: const Color(0xfff0f0f0),
+                            textStyle: const TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: h * 0.015,
@@ -197,17 +199,17 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              child:  Text(
-                                      "الاسم الرباعي\n $userName",
-                                      textAlign: TextAlign.right,
-                                      style: GoogleFonts.vazirmatn(
-                                        color: const Color(0xe5f0f0f0),
-                                        textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ),
+                              child: Text(
+                                "الاسم الرباعي\n $userName",
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.vazirmatn(
+                                  color: const Color(0xe5f0f0f0),
+                                  textStyle: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(height: h * 0.017),
                             Container(
@@ -224,16 +226,16 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                      "رقم الجوال\n $phoneNum",
-                                      textAlign: TextAlign.right,
-                                      style: GoogleFonts.vazirmatn(
-                                        color: const Color(0xe5f0f0f0),
-                                        textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ),
+                                "رقم الجوال\n $phoneNum",
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.vazirmatn(
+                                  color: const Color(0xe5f0f0f0),
+                                  textStyle: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(height: h * 0.017),
                             Container(
@@ -249,17 +251,17 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              child:Text(
-                                      "البريد الالكتروني\n $email",
-                                      textAlign: TextAlign.right,
-                                      style: GoogleFonts.vazirmatn(
-                                        color: const Color(0xe5f0f0f0),
-                                        textStyle: const TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ),
+                              child: Text(
+                                "البريد الالكتروني\n $email",
+                                textAlign: TextAlign.right,
+                                style: GoogleFonts.vazirmatn(
+                                  color: const Color(0xe5f0f0f0),
+                                  textStyle: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(height: h * 0.017),
                             Container(

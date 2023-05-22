@@ -13,20 +13,20 @@ import 'package:mowasulatuna/widgets/timer2.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/book_provider.dart';
+import '../../providers/current_possition.dart';
 
 class BookDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     final pro2 = Provider.of<TimerProvider>(context);
     final pro = Provider.of<BookProvider>(context);
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
 
     void startTimer() {
       const oneSec = Duration(seconds: 1);
       Timer.periodic(
         oneSec,
-            (Timer timer) {
+        (Timer timer) {
           if (pro2.start == 0) {
             pro2.cancelTimer();
           } else {
@@ -35,6 +35,7 @@ class BookDetails extends StatelessWidget {
         },
       );
     }
+
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Container(
@@ -192,27 +193,29 @@ class BookDetails extends StatelessWidget {
                   ],
                 ),
               ),
-              if (pro.canCancelBook==1)
+              if (pro.canCancelBook == 1)
                 GestureDetector(
-                  onTap: ()async {
+                  onTap: () async {
                     FirebaseAuth auth = FirebaseAuth.instance;
                     await FirebaseFirestore.instance
                         .collection('passengers')
                         .doc(auth.currentUser!.uid)
                         .collection('books')
                         .doc(auth.currentUser!.uid)
-                        .delete().then((_) {
+                        .delete()
+                        .then((_) {
                       print('delete to Firestore successfully');
                     }).catchError((error) {
                       print('Error delete to Firestore: $error');
                     });
 
-                    if(pro2.start>0){
+                    if (pro2.start > 0) {
                       pro2.cancelTimer();
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RHome(),
+                          builder: (context) =>
+                              RHome(proCurrentPosition.getkGooglePlex()),
                         ),
                       );
                     }
@@ -256,7 +259,7 @@ class BookDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-              if (pro.canCancelBook==2)
+              if (pro.canCancelBook == 2)
                 GestureDetector(
                   child: Container(
                     height: h * 0.086,
@@ -298,8 +301,7 @@ class BookDetails extends StatelessWidget {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () async{
-                        },
+                        onTap: () async {},
                         child: Container(
                           height: h * 0.086,
                           decoration: BoxDecoration(
@@ -331,12 +333,11 @@ class BookDetails extends StatelessWidget {
                             ],
                           ),
                         ),
-
                       ),
                     ),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () async{
+                        onTap: () async {
                           FirebaseAuth auth = FirebaseAuth.instance;
                           await FirebaseFirestore.instance
                               .collection('passengers')
@@ -354,17 +355,16 @@ class BookDetails extends StatelessWidget {
                             print('Error adding user to Firestore: $error');
                           });
 
-                          FirestoreHelperBooks firestoreHelper = FirestoreHelperBooks();
+                          FirestoreHelperBooks firestoreHelper =
+                              FirestoreHelperBooks();
 
-                          firestoreHelper
-                              .addBookToFirestore({
-                            'userID' : auth.currentUser!.uid,
+                          firestoreHelper.addBookToFirestore({
+                            'userID': auth.currentUser!.uid,
                             'location': pro.locationValue,
                             'selectedTime': pro.selectedTime,
                             'bookDay': pro.bookDay,
                             'numOfPersons': pro.numOfPersons,
-                          })
-                              .then((_) {
+                          }).then((_) {
                             print('User added to Firestore successfully');
                           }).catchError((error) {
                             print('Error adding user to Firestore: $error');
@@ -375,7 +375,6 @@ class BookDetails extends StatelessWidget {
                           Timer(const Duration(seconds: 30), () {
                             pro.setCanCancelBook(2);
                           });
-
                         },
                         child: Container(
                           height: h * 0.086,

@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:mowasulatuna/screens/common_screens/profile_screen.dart';
 import 'package:mowasulatuna/screens/common_screens/sign_in_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/current_possition.dart';
 import '../rider_screens/history.dart';
 import '../rider_screens/r_home.dart';
 import 'question.dart';
@@ -22,6 +21,7 @@ class MyDrawer extends StatelessWidget {
     final proType = Provider.of<UserTypeProvider>(context);
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
+    final proCurrentPosition = Provider.of<CurrentPossition>(context);
 
     final currentTime = DateTime.now();
     final hour = currentTime.hour + 3;
@@ -46,17 +46,19 @@ class MyDrawer extends StatelessWidget {
       }
     }
 
-    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection(proType.isDriver?'drivers':'passengers').snapshots();
+    final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance
+        .collection(proType.isDriver ? 'drivers' : 'passengers')
+        .snapshots();
 
     return StreamBuilder<QuerySnapshot>(
         stream: _usersStream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
             return AlertDialog(
-              title: Text('loading' ),
+              title: Text('loading'),
               content: Container(
                 height: 50,
                 child: Center(
@@ -116,7 +118,9 @@ class MyDrawer extends StatelessWidget {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>  RHome(),
+                                        builder: (context) => RHome(
+                                            proCurrentPosition
+                                                .getkGooglePlex()),
                                       ),
                                     );
                                   },
@@ -193,7 +197,8 @@ class MyDrawer extends StatelessWidget {
                           decoration: const BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                color: Color(0xffdda006), // Specify the border color
+                                color: Color(
+                                    0xffdda006), // Specify the border color
                                 width: 2.0, // Specify the border width
                               ),
                             ),
@@ -241,7 +246,8 @@ class MyDrawer extends StatelessWidget {
                           decoration: const BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                color: Color(0xffdda006), // Specify the border color
+                                color: Color(
+                                    0xffdda006), // Specify the border color
                                 width: 2.0, // Specify the border width
                               ),
                             ),
@@ -289,7 +295,8 @@ class MyDrawer extends StatelessWidget {
                           decoration: const BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                color: Color(0xffdda006), // Specify the border color
+                                color: Color(
+                                    0xffdda006), // Specify the border color
                                 width: 2.0, // Specify the border width
                               ),
                             ),
@@ -337,7 +344,8 @@ class MyDrawer extends StatelessWidget {
                           decoration: const BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                color: Color(0xffdda006), // Specify the border color
+                                color: Color(
+                                    0xffdda006), // Specify the border color
                                 width: 2.0, // Specify the border width
                               ),
                             ),
@@ -386,7 +394,8 @@ class MyDrawer extends StatelessWidget {
                           decoration: const BoxDecoration(
                             border: Border(
                               right: BorderSide(
-                                color: Color(0xffdda006), // Specify the border color
+                                color: Color(
+                                    0xffdda006), // Specify the border color
                                 width: 2.0, // Specify the border width
                               ),
                             ),
@@ -415,7 +424,6 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
           );
-        }
-    );
+        });
   }
-  }
+}
